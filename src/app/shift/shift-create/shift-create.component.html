@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row justify-content-center">
+  <form class="row justify-content-center" [formGroup]="shiftForm" (ngSubmit)="save()">
+
+    <label>
+      Dato:
+      <input type="date" formControlName="date">
+    </label>
+    <label>
+      Starts tidspunkt:
+      <input type="date" formControlName="timeStart">
+    </label>
+    <label>
+      Slut tidspunkt:
+      <input type="date" formControlName="timeEnd">
+    </label>
+    <label>
+      Route:
+      <input type="text" formControlName="route">
+    </label>
+    <label>
+      Active Route:
+      <input type="checkbox" formControlName="activeRoute">
+    </label>
+    <label>
+      Bruger:
+      <input type="number" formControlName="user">
+    </label>
+    <div>
+      <button class="button" type="submit">Save</button>
+    </div>
+
+  </form>
+  </div>
+</div>
