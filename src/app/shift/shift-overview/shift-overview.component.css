@@ -1,0 +1,26 @@
+.card:hover {
+  background: rgba(174,253,255,0.7);
+}
+
+.card::selection{
+  background: rgba(174,253,255,0.7);
+}
+
+.card {
+  min-width: 14% !important;
+  max-width: 14% !important;
+}
+
+.card-body {
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
+.currentDate {
+  border: #0080ff solid 2px;
+}
+
+.datesOutsideMonth {
+  background: rgba(172,175,174,0.1);
+  color: #bebebe;
+}
