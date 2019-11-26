@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-dark float-left" title="Next Month" (click)="prevMonth()"><-</button>
+      <button class="btn btn-dark float-right" title="Next Month" (click)="nextMonth()">-></button>
+      <h2>{{yearMonth}}</h2>
+
+    </div>
+  </div>
+  <div class="row justify-content-start">
+    <div routerLink="/shift-overview" class="card p-0 m-0" *ngFor="let day of currentMonthDates">
+      <div *ngIf="(now.toDateString()===day.toDateString())" class="card-body currentDate">
+        <h4 class="card-title">{{day.toDateString().slice(7 , 10)}}, {{day.toDateString().slice(0,3)}}</h4>
+        <p>Shift Information</p>
+      </div>
+      <div *ngIf="(currentMonthSelected.getMonth()!==day.getMonth())" class="card-body datesOutsideMonth">
+        <h4 class="card-title">{{day.toDateString().slice(7 , 10)}}, {{day.toDateString().slice(0,3)}}</h4>
+        <p>Shift Information</p>
+      </div>
+      <div *ngIf="(now.toDateString()!==day.toDateString()) && currentMonthSelected.getMonth()===day.getMonth()" class="card-body">
+        <h4 class="card-title">{{day.toDateString().slice(7 , 10)}}, {{day.toDateString().slice(0,3)}}</h4>
+        <p>Shift Information</p>
+      </div>
+    </div>
+  </div>
+</div>
