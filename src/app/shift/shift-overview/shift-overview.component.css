@@ -2,10 +2,6 @@
   background: rgba(174,253,255,0.7);
 }
 
-.card::selection{
-  background: rgba(174,253,255,0.7);
-}
-
 .card {
   min-width: 14% !important;
   max-width: 14% !important;

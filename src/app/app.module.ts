@@ -7,13 +7,15 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShiftOverviewComponent } from './shift/shift-overview/shift-overview.component';
+import { ShiftUpdateComponent } from './shift/shift-update/shift-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShiftCreateComponent,
     HomeComponent,
-    ShiftOverviewComponent
+    ShiftOverviewComponent,
+    ShiftUpdateComponent
   ],
   imports: [
     BrowserModule,
