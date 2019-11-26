@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'shift-create', component: ShiftCreateComponent},
   {path: 'shift-update', component: ShiftUpdateComponent},
   {path: 'shift-overview', component: ShiftOverviewComponent},
-  {path: 'Login', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'test', component: TestComponent},
   {path: '', component: HomeComponent},
 
