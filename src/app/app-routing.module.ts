@@ -6,15 +6,16 @@ import {ShiftOverviewComponent} from './shift/shift-overview/shift-overview.comp
 import {ShiftUpdateComponent} from './shift/shift-update/shift-update.component';
 import {LoginComponent} from './login/login/login.component';
 import {TestComponent} from './login/test/test.component';
+import {AuthGuard} from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'shift-create', component: ShiftCreateComponent},
-  {path: 'shift-update', component: ShiftUpdateComponent},
-  {path: 'shift-overview', component: ShiftOverviewComponent},
+  {path: 'shift-create', component: ShiftCreateComponent, canActivate: [AuthGuard]},
+  {path: 'shift-update', component: ShiftUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'shift-overview', component: ShiftOverviewComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'test', component: TestComponent},
-  {path: '', component: HomeComponent},
+  {path: 'test', component: TestComponent, canActivate: [AuthGuard]},
+  {path: '', component: LoginComponent},
 
 ];
 
