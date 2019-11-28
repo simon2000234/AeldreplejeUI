@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import {Moment} from "moment";
+import {PendingShift} from "../../shared/models/pendingshift-model";
+import {PendingShiftService} from "../../shared/services/pending-shift.service";
 
 @Component({
   selector: 'app-shift-overview',
@@ -16,12 +18,14 @@ export class ShiftOverviewComponent implements OnInit {
   currentMonthSelected: Date; // Used to check the currently selected month for styling the calendar
   yearMonth: string = this.currentTime.format('MMMM YYYY'); // Used to show Month and Year and a readable format
   currentMonthDates: Date[]; // Contains all the dates of the current calendar page
-  constructor() { }
+  pendingShifts: PendingShift[];
+  constructor(private psService: PendingShiftService) { }
 
   ngOnInit() {
-    // this.currentTime = moment().add(7, 'days').format('dddd, MMMM Do YYYY, h:mm:ss a');
     this.getMonth(this.currentTime);
     this.currentMonthSelected = this.currentTime.clone().toDate();
+    /*this.psService.getPendingShifts()
+      .subscribe(ps => this.pendingShifts = ps);*/
   }
 
   getMonth(time: Moment): void {
