@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import {Moment} from "moment";
-import {PendingShift} from "../../shared/models/pendingshift-model";
-import {PendingShiftService} from "../../shared/services/pending-shift.service";
+import {Moment} from 'moment';
+import {PendingShift} from '../../shared/models/pendingshift-model';
+import {PendingShiftService} from '../../shared/services/pending-shift.service';
+import {CalendarDate} from '../../shared/models/calendar-date-model';
+import {DatePShift} from '../../shared/models/date-pshift-model';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-shift-overview',
@@ -17,15 +20,33 @@ export class ShiftOverviewComponent implements OnInit {
   currentMonthIndex: number = moment().month(); // Tracking month index when going back and forth using prev/next month
   currentMonthSelected: Date; // Used to check the currently selected month for styling the calendar
   yearMonth: string = this.currentTime.format('MMMM YYYY'); // Used to show Month and Year and a readable format
-  currentMonthDates: Date[]; // Contains all the dates of the current calendar page
-  pendingShifts: PendingShift[];
+  currentMonthDates: CalendarDate[]; // Contains all the dates of the current calendar page
+  PShiftDates: DatePShift[] = [];
+  psdates: any[] = [];
   constructor(private psService: PendingShiftService) { }
 
   ngOnInit() {
-    this.getMonth(this.currentTime);
     this.currentMonthSelected = this.currentTime.clone().toDate();
-    /*this.psService.getPendingShifts()
-      .subscribe(ps => this.pendingShifts = ps);*/
+    const psd: DatePShift = {
+      calendarDate: moment().clone().date(1).toDate(),
+      pendingShift: {id: 1, shift: null, users: null}
+    };
+    this.PShiftDates.push(psd);
+    this.psService.getPendingShifts()
+      .subscribe(ps => {
+        for (const shift of ps) {
+          const pshiftDate: DatePShift = {
+            calendarDate: shift.shift.date,
+            pendingShift: {
+              users: shift.users,
+              shift: shift.shift,
+              id: shift.id
+            }
+          };
+          this.PShiftDates.push(pshiftDate);
+        }
+      });
+    this.getMonth(this.currentTime);
   }
 
   getMonth(time: Moment): void {
@@ -34,12 +55,37 @@ export class ShiftOverviewComponent implements OnInit {
     const totalDays: number = daysInMonth + weekModifier;
     const firstDayOfMonth = time.clone().subtract(moment().date() - 1, 'days').day(0);
 
-    const dates: any[] = [];
+    const dates: CalendarDate[] = [];
     for (let i = 0; i < totalDays; i++) {
-      dates.push(firstDayOfMonth.clone().add(i, 'days').toDate());
+      const tempDate: CalendarDate = {
+        calendarDate: firstDayOfMonth.clone().add(i, 'days').toDate(),
+        pendingShifts: [],
+        isEmpty: true
+      };
+      for (const cd of this.PShiftDates) {
+        if (tempDate.calendarDate.toDateString() === cd.calendarDate.toDateString()) {
+          tempDate.pendingShifts.push(cd.pendingShift);
+          tempDate.isEmpty = false;
+        }
+      }
+      dates.push(tempDate);
     }
     this.currentMonthDates = dates;
   }
+
+  checkDate(date: CalendarDate): CalendarDate {
+    let tempDate: CalendarDate = date;
+    for (const cd of this.PShiftDates) {
+      if (tempDate.calendarDate.toISOString() === cd.calendarDate.toISOString()) {
+        tempDate.pendingShifts.push(cd.pendingShift);
+        tempDate = null;
+      } else {
+        tempDate = null;
+      }
+    }
+    return tempDate;
+  }
+
   nextMonth(): void {
     this.currentMonthIndex++;
     this.currentTime = moment().month(this.currentMonthIndex);
