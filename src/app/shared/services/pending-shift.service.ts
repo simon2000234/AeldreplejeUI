@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from "../../../environments/environment";
-import {AuthenticationService} from "./authentication.service";
 import {Observable} from "rxjs";
 import {Shift} from "../models/shift-model";
-
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {AuthenticationService} from "./authentication.service";
+import {environment} from "../../../environments/environment";
+import {PendingShift} from "../models/pendingshift-model";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,42 +12,41 @@ const httpOptions = {
     Authorization: 'my-auth-token'
   })
 };
-
 @Injectable({
   providedIn: 'root'
 })
-export class ShiftService {
+export class PendingShiftService {
 
-  apiUrl = environment.baseUrl + 'shifts';
+  apiUrl = environment.baseUrl + 'pendingshifts';
   constructor(private http: HttpClient,
               private authService: AuthenticationService) { }
-  getShifts(): Observable<Shift[]> {
+  getPendingShifts(): Observable<PendingShift[]> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    return this.http.get<Shift[]>(this.apiUrl, httpOptions);
+    return this.http.get<PendingShift[]>(this.apiUrl, httpOptions);
   }
-  getShift(id: number): Observable<Shift> {
+  getPendingShift(id: number): Observable<PendingShift> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
     const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Shift>(url, httpOptions);
+    return this.http.get<PendingShift>(url, httpOptions);
   }
-  addShift(shift: Shift): Observable<Shift> {
+  addPendingShift(pendingShift: PendingShift): Observable<PendingShift> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    return this.http.post<Shift>(this.apiUrl, shift, httpOptions);
+    return this.http.post<PendingShift>(this.apiUrl, pendingShift, httpOptions);
   }
-  updateShift(shift: Shift): Observable<Shift> {
+  updatePendingShift(pendingshift: PendingShift): Observable<PendingShift> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    const url = `${this.apiUrl}/${shift.id}`;
-    return this.http.put<Shift>(url, shift, httpOptions);
+    const url = `${this.apiUrl}/${pendingshift.id}`;
+    return this.http.put<PendingShift>(url, pendingshift, httpOptions);
   }
-  deleteShift(id: number): Observable<any> {
+  deletePendingShift(id: number): Observable<any> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
