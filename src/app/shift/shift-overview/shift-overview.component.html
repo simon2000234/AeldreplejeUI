@@ -1,29 +1,29 @@
 <div class="container">
-  <div class="row">
+  <div class="row calendar-header mt-2">
     <div class="col text-center">
-      <button class="btn btn-dark float-left" title="Next Month" (click)="prevMonth()"><-</button>
-      <button class="btn btn-dark float-right" title="Next Month" (click)="nextMonth()">-></button>
+      <button class="btn btn-danger mt-1 float-left calendar-button" title="Previous Month" (click)="prevMonth()"><-</button>
+      <button class="btn btn-danger mt-1 float-right calendar-button" title="Next Month" (click)="nextMonth()">-></button>
       <h2>{{yearMonth}}</h2>
 
     </div>
   </div>
-  <div class="row justify-content-start">
+  <div class="row justify-content-start calendar-body mb-5">
     <div routerLink="/shift-overview" class="card p-0 m-0" *ngFor="let day of currentMonthDates">
 
-      <div *ngIf="(now.toDateString()===day.calendarDate.toDateString())" class="card-body p-0 currentDate">
+      <div *ngIf="(now.toDateString()===day.calendarDate.toDateString())" class="card-body pb-0 pt-2 currentDate">
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
         <div *ngIf="!day.isEmpty">
           <div *ngFor="let shift of day.pendingShifts">
-            <p>{{shift.id}}</p>
+            <p class="m-0">{{shift.id}}</p>
           </div>
         </div>
       </div>
 
-      <div *ngIf="(currentMonthSelected.getMonth()!==day.calendarDate.getMonth())" class="card-body p-0 datesOutsideMonth">
+      <div *ngIf="(currentMonthSelected.getMonth()!==day.calendarDate.getMonth())" class="card-body pb-0 pt-2 datesOutsideMonth">
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
         <div *ngIf="!day.isEmpty">
           <div *ngFor="let shift of day.pendingShifts">
-            <p>{{shift.id}}</p>
+            <p class="m-0">{{shift.id}}</p>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
         <div *ngIf="!day.isEmpty">
           <div *ngFor="let shift of day.pendingShifts">
-            <p>{{shift.id}}<br>bla<br>bla<br>bla</p>
+            <p class="m-0">{{shift.id}}</p>
           </div>
         </div>
       </div>

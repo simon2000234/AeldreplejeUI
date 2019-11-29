@@ -32,6 +32,21 @@ export class ShiftOverviewComponent implements OnInit {
       pendingShift: {id: 1, shift: null, users: null}
     };
     this.PShiftDates.push(psd);
+    const psd2: DatePShift = {
+      calendarDate: moment().clone().toDate(),
+      pendingShift: {id: 2, shift: null, users: null}
+    };
+    this.PShiftDates.push(psd2);
+    const psd3: DatePShift = {
+      calendarDate: moment().clone().date(0).toDate(),
+      pendingShift: {id: 3, shift: null, users: null}
+    };
+    this.PShiftDates.push(psd3);
+    const psd4: DatePShift = {
+      calendarDate: moment().clone().date(1).toDate(),
+      pendingShift: {id: 4, shift: null, users: null}
+    };
+    this.PShiftDates.push(psd4);
     this.psService.getPendingShifts()
       .subscribe(ps => {
         for (const shift of ps) {
