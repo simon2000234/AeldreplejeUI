@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
-import {ShiftRoute} from "../../shared/models/route-model";
-import {User} from "../../shared/models/user-model";
-import {Router} from "@angular/router";
-import {ShiftService} from "../../shared/services/shift.service";
-import {RouteService} from "../../shared/services/route.service";
-import {PendingShiftService} from "../../shared/services/pending-shift.service";
-import {Shift} from "../../shared/models/shift-model";
-import {PendingShift} from "../../shared/models/pendingshift-model";
+import {FormBuilder} from '@angular/forms';
+import {ShiftRoute} from '../../shared/models/route-model';
+import {User} from '../../shared/models/user-model';
+import {Router} from '@angular/router';
+import {ShiftService} from '../../shared/services/shift.service';
+import {RouteService} from '../../shared/services/route.service';
+import {PendingShiftService} from '../../shared/services/pending-shift.service';
+import {Shift} from '../../shared/models/shift-model';
+import {PendingShift} from '../../shared/models/pendingshift-model';
 
 @Component({
   selector: 'app-shift-create',
