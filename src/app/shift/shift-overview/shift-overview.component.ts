@@ -22,7 +22,6 @@ export class ShiftOverviewComponent implements OnInit {
   yearMonth: string = this.currentTime.format('MMMM YYYY'); // Used to show Month and Year and a readable format
   currentMonthDates: CalendarDate[]; // Contains all the dates of the current calendar page
   PShiftDates: DatePShift[] = [];
-  psdates: any[] = [];
   PShifts: PendingShift[] = [];
   constructor(private psService: PendingShiftService) { }
 
@@ -30,21 +29,18 @@ export class ShiftOverviewComponent implements OnInit {
     this.currentMonthSelected = this.currentTime.clone().toDate();
 
 
-    this.getPShifts();
-    for (const theDates of this.PShifts) {
-       const date: DatePShift = {
-         pendingShift: theDates,
-         calendarDate: theDates.shift.date
-       };
-       this.PShiftDates.push(date);
-    }
-
-    this.getMonth(this.currentTime);
-  }
-
-  getPShifts(): void {
     this.psService.getPendingShifts()
-      .subscribe(ps => this.PShifts = ps);
+      .subscribe(ps => {
+        this.PShifts = ps;
+        for (const theDates of this.PShifts) {
+          const date: DatePShift = {
+            pendingShift: theDates,
+            calendarDate: new Date(theDates.shift.date)
+          };
+          this.PShiftDates.push(date);
+        }
+        this.getMonth(this.currentTime);
+      });
   }
 
   getMonth(time: Moment): void {
@@ -57,11 +53,9 @@ export class ShiftOverviewComponent implements OnInit {
     for (let i = 0; i < totalDays; i++) {
       const tempDate: CalendarDate = {
         calendarDate: firstDayOfMonth.clone().add(i, 'days').toDate(),
-        pendingShifts: [],
+        pendingShifts: [] = [],
         isEmpty: true
       };
-
-
       for (const cd of this.PShiftDates) {
         if (tempDate.calendarDate.toDateString() === cd.calendarDate.toDateString()) {
           tempDate.pendingShifts.push(cd.pendingShift);
@@ -73,18 +67,6 @@ export class ShiftOverviewComponent implements OnInit {
     this.currentMonthDates = dates;
   }
 
-  checkDate(date: CalendarDate): CalendarDate {
-    let tempDate: CalendarDate = date;
-    for (const cd of this.PShiftDates) {
-      if (tempDate.calendarDate.toISOString() === cd.calendarDate.toISOString()) {
-        tempDate.pendingShifts.push(cd.pendingShift);
-        tempDate = null;
-      } else {
-        tempDate = null;
-      }
-    }
-    return tempDate;
-  }
 
   nextMonth(): void {
     this.currentMonthIndex++;
