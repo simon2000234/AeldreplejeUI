@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class ShiftService {
 
-  apiUrl = environment.baseUrl + 'shifts';
+  apiUrl = environment.baseUrl + 'shift';
   constructor(private http: HttpClient,
               private authService: AuthenticationService) { }
   getShifts(): Observable<Shift[]> {

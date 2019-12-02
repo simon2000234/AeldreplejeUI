@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class RouteService {
 
-  apiUrl = environment.baseUrl + 'routes';
+  apiUrl = environment.baseUrl + 'route';
   constructor(private http: HttpClient,
               private authService: AuthenticationService) { }
   getShiftRoutes(): Observable<ShiftRoute[]> {

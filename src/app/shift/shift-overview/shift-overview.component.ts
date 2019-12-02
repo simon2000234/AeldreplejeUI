@@ -23,45 +23,28 @@ export class ShiftOverviewComponent implements OnInit {
   currentMonthDates: CalendarDate[]; // Contains all the dates of the current calendar page
   PShiftDates: DatePShift[] = [];
   psdates: any[] = [];
+  PShifts: PendingShift[] = [];
   constructor(private psService: PendingShiftService) { }
 
   ngOnInit() {
     this.currentMonthSelected = this.currentTime.clone().toDate();
-    const psd: DatePShift = {
-      calendarDate: moment().clone().date(1).toDate(),
-      pendingShift: {id: 1, shift: null, users: null}
-    };
-    this.PShiftDates.push(psd);
-    const psd2: DatePShift = {
-      calendarDate: moment().clone().toDate(),
-      pendingShift: {id: 2, shift: null, users: null}
-    };
-    this.PShiftDates.push(psd2);
-    const psd3: DatePShift = {
-      calendarDate: moment().clone().date(0).toDate(),
-      pendingShift: {id: 3, shift: null, users: null}
-    };
-    this.PShiftDates.push(psd3);
-    const psd4: DatePShift = {
-      calendarDate: moment().clone().date(1).toDate(),
-      pendingShift: {id: 4, shift: null, users: null}
-    };
-    this.PShiftDates.push(psd4);
-    this.psService.getPendingShifts()
-      .subscribe(ps => {
-        for (const shift of ps) {
-          const pshiftDate: DatePShift = {
-            calendarDate: shift.shift.date,
-            pendingShift: {
-              users: shift.users,
-              shift: shift.shift,
-              id: shift.id
-            }
-          };
-          this.PShiftDates.push(pshiftDate);
-        }
-      });
+
+
+    this.getPShifts();
+    for (const theDates of this.PShifts) {
+       const date: DatePShift = {
+         pendingShift: theDates,
+         calendarDate: theDates.shift.date
+       };
+       this.PShiftDates.push(date);
+    }
+
     this.getMonth(this.currentTime);
+  }
+
+  getPShifts(): void {
+    this.psService.getPendingShifts()
+      .subscribe(ps => this.PShifts = ps);
   }
 
   getMonth(time: Moment): void {
@@ -77,6 +60,8 @@ export class ShiftOverviewComponent implements OnInit {
         pendingShifts: [],
         isEmpty: true
       };
+
+
       for (const cd of this.PShiftDates) {
         if (tempDate.calendarDate.toDateString() === cd.calendarDate.toDateString()) {
           tempDate.pendingShifts.push(cd.pendingShift);

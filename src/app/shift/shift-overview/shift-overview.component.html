@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div *ngIf="(currentMonthSelected.getMonth()!==day.calendarDate.getMonth())" class="card-body pb-0 pt-2 datesOutsideMonth">
+      <div *ngIf="(currentMonthSelected.getMonth()!=day.calendarDate.getMonth())" class="card-body pb-0 pt-2 datesOutsideMonth">
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
         <div *ngIf="!day.isEmpty">
           <div *ngFor="let shift of day.pendingShifts">
