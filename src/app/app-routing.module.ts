@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'shift-overview', component: ShiftOverviewComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'test', component: TestComponent, canActivate: [AuthGuard]},
-  {path: 'user', component: UserPageComponent},
+  {path: 'user', component: UserPageComponent, canActivate: [AuthGuard]},
   {path: '', component: LoginComponent},
 
 ];
