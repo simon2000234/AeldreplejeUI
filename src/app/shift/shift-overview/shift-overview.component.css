@@ -2,9 +2,24 @@
   background: rgba(174,253,255,0.7);
 }
 
+.calendar-header {
+  background: #514f55;
+  color: #ffffff;
+}
+
+.calendar-body {
+  border: #514f55 2px solid;
+}
+
+.calendar-button {
+  height: fit-content;
+}
+
 .card {
-  min-width: 14% !important;
-  max-width: 14% !important;
+  min-width: 14.285% !important;
+  max-width: 14.285% !important;
+  min-height: 160px !important;
+  max-height: 160px !important;
 }
 
 .card-body {

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from "../../../environments/environment";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthenticationService} from "./authentication.service";
+import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
 import {Shift} from "../models/shift-model";
-
+import {Group} from "../models/group-model";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,42 +12,41 @@ const httpOptions = {
     Authorization: 'my-auth-token'
   })
 };
-
 @Injectable({
   providedIn: 'root'
 })
-export class ShiftService {
+export class GroupService {
 
-  apiUrl = environment.baseUrl + 'shift';
+  apiUrl = environment.baseUrl + 'groups';
   constructor(private http: HttpClient,
               private authService: AuthenticationService) { }
-  getShifts(): Observable<Shift[]> {
+  getGroups(): Observable<Group[]> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    return this.http.get<Shift[]>(this.apiUrl, httpOptions);
+    return this.http.get<Group[]>(this.apiUrl, httpOptions);
   }
-  getShift(id: number): Observable<Shift> {
+  getGroup(id: number): Observable<Group> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
     const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Shift>(url, httpOptions);
+    return this.http.get<Group>(url, httpOptions);
   }
-  addShift(shift: Shift): Observable<Shift> {
+  addGroup(group: Group): Observable<Group> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    return this.http.post<Shift>(this.apiUrl, shift, httpOptions);
+    return this.http.post<Group>(this.apiUrl, group, httpOptions);
   }
-  updateShift(shift: Shift): Observable<Shift> {
+  updateGroup(group: Group): Observable<Group> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    const url = `${this.apiUrl}/${shift.id}`;
-    return this.http.put<Shift>(url, shift, httpOptions);
+    const url = `${this.apiUrl}/${group.id}`;
+    return this.http.put<Group>(url, group, httpOptions);
   }
-  deleteShift(id: number): Observable<any> {
+  deleteGroup(id: number): Observable<any> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 

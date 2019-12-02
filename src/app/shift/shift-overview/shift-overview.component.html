@@ -1,26 +1,42 @@
 <div class="container">
-  <div class="row">
+  <div class="row calendar-header mt-2">
     <div class="col text-center">
-      <button class="btn btn-dark float-left" title="Next Month" (click)="prevMonth()"><-</button>
-      <button class="btn btn-dark float-right" title="Next Month" (click)="nextMonth()">-></button>
+      <button class="btn btn-danger mt-1 float-left calendar-button" title="Previous Month" (click)="prevMonth()"><-</button>
+      <button class="btn btn-danger mt-1 float-right calendar-button" title="Next Month" (click)="nextMonth()">-></button>
       <h2>{{yearMonth}}</h2>
 
     </div>
   </div>
-  <div class="row justify-content-start">
+  <div class="row justify-content-start calendar-body mb-5">
     <div routerLink="/shift-overview" class="card p-0 m-0" *ngFor="let day of currentMonthDates">
-      <div *ngIf="(now.toDateString()===day.toDateString())" class="card-body currentDate">
-        <h4 class="card-title">{{day.toDateString().slice(7 , 10)}}, {{day.toDateString().slice(0,3)}}</h4>
-        <p>Shift Information</p>
+
+      <div *ngIf="(now.toDateString()===day.calendarDate.toDateString())" class="card-body pb-0 pt-2 currentDate">
+        <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
+        <div *ngIf="!day.isEmpty">
+          <div *ngFor="let shift of day.pendingShifts">
+            <p class="m-0">{{shift.id}}</p>
+          </div>
+        </div>
       </div>
-      <div *ngIf="(currentMonthSelected.getMonth()!==day.getMonth())" class="card-body datesOutsideMonth">
-        <h4 class="card-title">{{day.toDateString().slice(7 , 10)}}, {{day.toDateString().slice(0,3)}}</h4>
-        <p>Shift Information</p>
+
+      <div *ngIf="(currentMonthSelected.getMonth()!=day.calendarDate.getMonth())" class="card-body pb-0 pt-2 datesOutsideMonth">
+        <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
+        <div *ngIf="!day.isEmpty">
+          <div *ngFor="let shift of day.pendingShifts">
+            <p class="m-0">{{shift.id}}</p>
+          </div>
+        </div>
       </div>
-      <div *ngIf="(now.toDateString()!==day.toDateString()) && currentMonthSelected.getMonth()===day.getMonth()" class="card-body">
-        <h4 class="card-title">{{day.toDateString().slice(7 , 10)}}, {{day.toDateString().slice(0,3)}}</h4>
-        <p>Shift Information</p>
+
+      <div *ngIf="(now.toDateString()!==day.calendarDate.toDateString()) && currentMonthSelected.getMonth()===day.calendarDate.getMonth()" class="card-body pb-0 pt-2">
+        <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
+        <div *ngIf="!day.isEmpty">
+          <div *ngFor="let shift of day.pendingShifts">
+            <p class="m-0">{{shift.id}}</p>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
