@@ -39,25 +39,26 @@ export class ShiftCreateComponent implements OnInit {
     let shiftRoute: ShiftRoute = {name: shiftFromFields.route};
 
     this.routeService.addShiftRoute(shiftRoute)
-      .subscribe(sr => shiftRoute = sr);
-
-    let shiftToCreate: Shift = {
-      date: shiftFromFields.date,
-      timeStart: shiftFromFields.timeStart,
-      timeEnd: shiftFromFields.timeEnd,
-      activeRoute: shiftFromFields.activeRoute,
-      route: {id: shiftRoute.id}
-    };
-
-    this.shiftService.addShift(shiftToCreate)
-      .subscribe(stc => shiftToCreate = stc);
-
-    const pShiftToCreate: PendingShift = {
-      shift: shiftToCreate
-    };
-    this.pShiftService.addPendingShift(pShiftToCreate)
-      .subscribe(() => {
-        this.router.navigateByUrl('/shift-overview');
+      .subscribe(sr => {
+        shiftRoute = sr;
+        let shiftToCreate: Shift = {
+          date: new Date(shiftFromFields.date),
+          timeStart: new Date(shiftFromFields.timeStart),
+          timeEnd: new Date(shiftFromFields.timeEnd),
+          activeRoute: shiftFromFields.activeRoute,
+          route: {id: shiftRoute.id}
+        };
+        this.shiftService.addShift(shiftToCreate)
+          .subscribe(stc => {
+            shiftToCreate = stc;
+            const pShiftToCreate: PendingShift = {
+              shift: {id: shiftToCreate.id}
+            };
+            this.pShiftService.addPendingShift(pShiftToCreate)
+              .subscribe(() => {
+                this.router.navigateByUrl('/shift-overview');
+              });
+          });
       });
   }
 
