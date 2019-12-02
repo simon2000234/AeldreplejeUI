@@ -12,6 +12,7 @@ import { ShiftOverviewComponent } from './shift/shift-overview/shift-overview.co
 import { ShiftUpdateComponent } from './shift/shift-update/shift-update.component';
 import { TestComponent } from './login/test/test.component';
 import {HttpClientModule} from '@angular/common/http';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {HttpClientModule} from '@angular/common/http';
     HomeComponent,
     ShiftOverviewComponent,
     ShiftUpdateComponent,
-    TestComponent
+    TestComponent,
+    NavbarComponent
 
   ],
   imports: [
