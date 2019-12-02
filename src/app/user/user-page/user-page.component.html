@@ -2,10 +2,14 @@
 
 <ul class="PendingShift">
   <li *ngFor="let PendingShift of pShifts">
-      <p>
-        PendingShift: {{PendingShift.id}}  {{PendingShift.shift}};
-      </p>
 
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{PendingShift.shift.timeStart}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{PendingShift.shift.timeEnd}}</h6>
+        <p class="card-text">en åben vagt .</p>
+        <a href="#" class="btn btn-primary">jeg ka  tage den!</a>
 
-
+      </div>
+    </div>
 
