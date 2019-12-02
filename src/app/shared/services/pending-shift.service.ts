@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class PendingShiftService {
 
-  apiUrl = environment.baseUrl + 'pendingshifts';
+  apiUrl = environment.baseUrl + 'pendingshift';
   constructor(private http: HttpClient,
               private authService: AuthenticationService) { }
   getPendingShifts(): Observable<PendingShift[]> {

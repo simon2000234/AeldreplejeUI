@@ -12,12 +12,16 @@ export class UserPageComponent implements OnInit {
   constructor(private pendingShiftService: PendingShiftService) { }
   pShifts: PendingShift[];
 
+
   getPendingShifts(): void {
 this.pendingShiftService.getPendingShifts()
 .subscribe(pShifts => this.pShifts = pShifts);
 }
 
+
+
   ngOnInit() {
+    this.getPendingShifts();
   }
 
 }
