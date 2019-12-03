@@ -3,16 +3,20 @@
 }
 
 .calendar-header {
-  background: #514f55;
+  background: rgb(0, 122, 184);
   color: #ffffff;
 }
 
 .calendar-body {
-  border: #514f55 2px solid;
+  border: rgb(0, 122, 184) 2px solid;
 }
 
 .calendar-button {
   height: fit-content;
+  background: white !important;
+  border: white solid 2px !important;
+  color: rgb(0, 122, 184);
+  font-weight: bold !important;
 }
 
 .card {
