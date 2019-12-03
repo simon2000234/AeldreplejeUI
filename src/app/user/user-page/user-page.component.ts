@@ -3,7 +3,7 @@ import {PendingShiftService} from 'src/app/shared/services/pending-shift.service
 import {PendingShift} from '../../shared/models/pendingshift-model';
 import {Shift} from '../../shared/models/shift-model';
 import {User} from '../../shared/models/user-model';
-import {UserSer}
+import {UserService} from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-user-page',
@@ -12,14 +12,15 @@ import {UserSer}
 })
 export class UserPageComponent implements OnInit {
 
-  constructor(private pendingShiftService: PendingShiftService) { }
+  constructor(private pendingShiftService: PendingShiftService, private userService: UserService) { }
   pShifts: PendingShift[];
   cUser: User;
   setToChosen(ps: PendingShift): void {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.(currentUser.id).subscribe(u => this.cUser = u);
-    ps.users.push(this.cUser))
-    this.pendingShiftService.updatePendingShift(ps);
+    this.userService.getUser(currentUser.id).subscribe(u => {this.cUser = u;
+                                                             ps.users.push(this.cUser);
+                                                             this.pendingShiftService.updatePendingShift(ps).subscribe();
+    });
   }
 
 
