@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthenticationService} from "./authentication.service";
 import {environment} from "../../../environments/environment";
 import {PendingShift} from "../models/pendingshift-model";
+import {debug} from 'util';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -40,11 +41,25 @@ export class PendingShiftService {
     return this.http.post<PendingShift>(this.apiUrl, pendingShift, httpOptions);
   }
   updatePendingShift(pendingshift: PendingShift): Observable<PendingShift> {
+    const pendingShiftToReturn = {
+      Id: pendingshift.id,
+      Shift: {Id : pendingshift.shift.id},
+      Users: []
+    };
+    pendingshift.users.forEach(user => {
+      if (user.id === undefined) {
+      pendingShiftToReturn.Users.push({
+        User: {Id: user.userId}, PendingShift: {Id: pendingshift.id}
+      });
+    } else {
+        pendingShiftToReturn.Users.push({
+          User: {Id: user.id}, PendingShift: {Id: pendingshift.id}
+        });
+      }});
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
-
     const url = `${this.apiUrl}/${pendingshift.id}`;
-    return this.http.put<PendingShift>(url, pendingshift, httpOptions);
+    return this.http.put<any>(url, pendingShiftToReturn, httpOptions);
   }
   deletePendingShift(id: number): Observable<any> {
     httpOptions.headers =

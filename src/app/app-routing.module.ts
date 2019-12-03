@@ -8,6 +8,7 @@ import {LoginComponent} from './login/login/login.component';
 import {TestComponent} from './login/test/test.component';
 import {AuthGuard} from './shared/guards/auth.guard';
 import {PshiftViewComponent} from './shift/calendar-day/pshift-view/pshift-view.component';
+import {UserPageComponent} from './user/user-page/user-page.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'pending-calendar-shift', component: PshiftViewComponent},
   {path: 'login', component: LoginComponent},
   {path: 'test', component: TestComponent, canActivate: [AuthGuard]},
+  {path: 'user', component: UserPageComponent, canActivate: [AuthGuard]},
   {path: '', component: LoginComponent},
 
 ];

@@ -9,5 +9,6 @@ export interface User {
   group?: Group;
   profilePicture: string;
   shifts: Shift[];
+  userId?: number;
 
 }

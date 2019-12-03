@@ -15,6 +15,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {CalendarService} from "./shared/services/calendar.service";
 import { PshiftViewComponent } from './shift/calendar-day/pshift-view/pshift-view.component';
 
+import { NavbarComponent } from './shared/navbar/navbar.component';
+
+import { UserPageComponent } from './user/user-page/user-page.component';
+
+
 
 @NgModule({
   declarations: [
@@ -25,15 +30,15 @@ import { PshiftViewComponent } from './shift/calendar-day/pshift-view/pshift-vie
     ShiftOverviewComponent,
     ShiftUpdateComponent,
     TestComponent,
-    PshiftViewComponent
-
+    PshiftViewComponent,
+    NavbarComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     HttpClientModule,
     AppRoutingModule,
-
     ReactiveFormsModule
   ],
   providers: [CalendarService],
