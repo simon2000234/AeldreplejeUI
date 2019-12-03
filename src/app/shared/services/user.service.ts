@@ -13,6 +13,7 @@ const httpOptions = {
     Authorization: 'my-auth-token'
   })
 };
+
 @Injectable({
   providedIn: 'root'
 })
