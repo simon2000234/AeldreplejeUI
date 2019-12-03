@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AuthenticationService} from './authentication.service';
-import {Observable} from 'rxjs';
-import {User} from '../models/user-model';
+import {AuthenticationService} from "./authentication.service";
+import {environment} from "../../../environments/environment";
+import {Observable} from "rxjs";
+import {PendingShift} from "../models/pendingshift-model";
+import {User} from "../models/user-model";
+import {Shift} from "../models/shift-model";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,6 +18,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
+
   apiUrl = environment.baseUrl + 'users';
   constructor(private http: HttpClient,
               private authService: AuthenticationService) { }

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from "../../../environments/environment";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthenticationService} from "./authentication.service";
+import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
-import {Shift} from "../models/shift-model";
-
+import {ShiftRoute} from "../models/route-model";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,42 +11,41 @@ const httpOptions = {
     Authorization: 'my-auth-token'
   })
 };
-
 @Injectable({
   providedIn: 'root'
 })
-export class ShiftService {
+export class RouteService {
 
-  apiUrl = environment.baseUrl + 'shift';
+  apiUrl = environment.baseUrl + 'route';
   constructor(private http: HttpClient,
               private authService: AuthenticationService) { }
-  getShifts(): Observable<Shift[]> {
+  getShiftRoutes(): Observable<ShiftRoute[]> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    return this.http.get<Shift[]>(this.apiUrl, httpOptions);
+    return this.http.get<ShiftRoute[]>(this.apiUrl, httpOptions);
   }
-  getShift(id: number): Observable<Shift> {
+  getShiftRoute(id: number): Observable<ShiftRoute> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
     const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Shift>(url, httpOptions);
+    return this.http.get<ShiftRoute>(url, httpOptions);
   }
-  addShift(shift: Shift): Observable<Shift> {
+  addShiftRoute(shiftRoute: ShiftRoute): Observable<ShiftRoute> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    return this.http.post<Shift>(this.apiUrl, shift, httpOptions);
+    return this.http.post<ShiftRoute>(this.apiUrl, shiftRoute, httpOptions);
   }
-  updateShift(shift: Shift): Observable<Shift> {
+  updateShiftRoute(shiftRoute: ShiftRoute): Observable<ShiftRoute> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    const url = `${this.apiUrl}/${shift.id}`;
-    return this.http.put<Shift>(url, shift, httpOptions);
+    const url = `${this.apiUrl}/${shiftRoute.id}`;
+    return this.http.put<ShiftRoute>(url, shiftRoute, httpOptions);
   }
-  deleteShift(id: number): Observable<any> {
+  deleteShiftRoute(id: number): Observable<any> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 

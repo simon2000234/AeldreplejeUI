@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import {Moment} from "moment";
+import {Moment} from 'moment';
+import {PendingShift} from '../../shared/models/pendingshift-model';
+import {PendingShiftService} from '../../shared/services/pending-shift.service';
+import {CalendarDate} from '../../shared/models/calendar-date-model';
+import {DatePShift} from '../../shared/models/date-pshift-model';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-shift-overview',
@@ -15,13 +20,27 @@ export class ShiftOverviewComponent implements OnInit {
   currentMonthIndex: number = moment().month(); // Tracking month index when going back and forth using prev/next month
   currentMonthSelected: Date; // Used to check the currently selected month for styling the calendar
   yearMonth: string = this.currentTime.format('MMMM YYYY'); // Used to show Month and Year and a readable format
-  currentMonthDates: Date[]; // Contains all the dates of the current calendar page
-  constructor() { }
+  currentMonthDates: CalendarDate[]; // Contains all the dates of the current calendar page
+  PShiftDates: DatePShift[] = [];
+  PShifts: PendingShift[] = [];
+  constructor(private psService: PendingShiftService) { }
 
   ngOnInit() {
-    // this.currentTime = moment().add(7, 'days').format('dddd, MMMM Do YYYY, h:mm:ss a');
-    this.getMonth(this.currentTime);
     this.currentMonthSelected = this.currentTime.clone().toDate();
+
+
+    this.psService.getPendingShifts()
+      .subscribe(ps => {
+        this.PShifts = ps;
+        for (const theDates of this.PShifts) {
+          const date: DatePShift = {
+            pendingShift: theDates,
+            calendarDate: new Date(theDates.shift.date)
+          };
+          this.PShiftDates.push(date);
+        }
+        this.getMonth(this.currentTime);
+      });
   }
 
   getMonth(time: Moment): void {
@@ -30,12 +49,25 @@ export class ShiftOverviewComponent implements OnInit {
     const totalDays: number = daysInMonth + weekModifier;
     const firstDayOfMonth = time.clone().subtract(moment().date() - 1, 'days').day(0);
 
-    const dates: any[] = [];
+    const dates: CalendarDate[] = [];
     for (let i = 0; i < totalDays; i++) {
-      dates.push(firstDayOfMonth.clone().add(i, 'days').toDate());
+      const tempDate: CalendarDate = {
+        calendarDate: firstDayOfMonth.clone().add(i, 'days').toDate(),
+        pendingShifts: [] = [],
+        isEmpty: true
+      };
+      for (const cd of this.PShiftDates) {
+        if (tempDate.calendarDate.toDateString() === cd.calendarDate.toDateString()) {
+          tempDate.pendingShifts.push(cd.pendingShift);
+          tempDate.isEmpty = false;
+        }
+      }
+      dates.push(tempDate);
     }
     this.currentMonthDates = dates;
   }
+
+
   nextMonth(): void {
     this.currentMonthIndex++;
     this.currentTime = moment().month(this.currentMonthIndex);
