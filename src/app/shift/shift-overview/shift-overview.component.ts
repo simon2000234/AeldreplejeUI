@@ -6,6 +6,8 @@ import {PendingShiftService} from '../../shared/services/pending-shift.service';
 import {CalendarDate} from '../../shared/models/calendar-date-model';
 import {DatePShift} from '../../shared/models/date-pshift-model';
 import {of} from 'rxjs';
+import {CalendarService} from "../../shared/services/calendar.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shift-overview',
@@ -23,7 +25,9 @@ export class ShiftOverviewComponent implements OnInit {
   currentMonthDates: CalendarDate[]; // Contains all the dates of the current calendar page
   PShiftDates: DatePShift[] = [];
   PShifts: PendingShift[] = [];
-  constructor(private psService: PendingShiftService) { }
+  constructor(private psService: PendingShiftService,
+              public cService: CalendarService,
+              private router: Router) { }
 
   ngOnInit() {
     this.currentMonthSelected = this.currentTime.clone().toDate();
@@ -81,6 +85,12 @@ export class ShiftOverviewComponent implements OnInit {
     this.yearMonth = this.currentTime.format('MMMM YYYY');
     this.currentMonthSelected = this.currentTime.clone().toDate();
     this.getMonth(this.currentTime);
+  }
+
+  clickAction(calendarDate: CalendarDate): void {
+    this.cService.setCalendarArray(calendarDate.pendingShifts);
+    this.cService.setCalendarDate(calendarDate.calendarDate);
+    this.router.navigateByUrl('/pending-calendar-shift');
   }
 
 }

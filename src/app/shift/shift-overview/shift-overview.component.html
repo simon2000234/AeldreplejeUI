@@ -8,9 +8,20 @@
     </div>
   </div>
   <div class="row justify-content-start calendar-body mb-5">
-    <div routerLink="/shift-overview" class="card p-0 m-0" *ngFor="let day of currentMonthDates">
+    <div class="card p-0 m-0" *ngFor="let day of currentMonthDates">
 
-      <div *ngIf="(now.toDateString()===day.calendarDate.toDateString())" class="card-body pb-0 pt-2 currentDate">
+      <div *ngIf="(now.toDateString()===day.calendarDate.toDateString())"
+           class="card-body pb-0 pt-2 currentDate" (click)="clickAction(day)">
+        <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
+        <div *ngIf="!day.isEmpty">
+          <div *ngFor="let shift of day.pendingShifts">
+            <p class="m-0">{{shift.shift.timeStart}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="(currentMonthSelected.getMonth()!=day.calendarDate.getMonth())"
+           class="card-body pb-0 pt-2 datesOutsideMonth" (click)="clickAction(day)">
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
         <div *ngIf="!day.isEmpty">
           <div *ngFor="let shift of day.pendingShifts">
@@ -19,16 +30,8 @@
         </div>
       </div>
 
-      <div *ngIf="(currentMonthSelected.getMonth()!=day.calendarDate.getMonth())" class="card-body pb-0 pt-2 datesOutsideMonth">
-        <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
-        <div *ngIf="!day.isEmpty">
-          <div *ngFor="let shift of day.pendingShifts">
-            <p class="m-0">{{shift.shift.route.name}}</p>
-          </div>
-        </div>
-      </div>
-
-      <div *ngIf="(now.toDateString()!==day.calendarDate.toDateString()) && currentMonthSelected.getMonth()===day.calendarDate.getMonth()" class="card-body pb-0 pt-2">
+      <div *ngIf="(now.toDateString()!==day.calendarDate.toDateString()) && currentMonthSelected.getMonth()===day.calendarDate.getMonth()"
+           class="card-body pb-0 pt-2" (click)="clickAction(day)">
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
         <div *ngIf="!day.isEmpty">
           <div *ngFor="let shift of day.pendingShifts">

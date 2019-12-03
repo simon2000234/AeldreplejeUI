@@ -8,6 +8,8 @@ import {RouteService} from '../../shared/services/route.service';
 import {PendingShiftService} from '../../shared/services/pending-shift.service';
 import {Shift} from '../../shared/models/shift-model';
 import {PendingShift} from '../../shared/models/pendingshift-model';
+import * as moment from 'moment';
+import {CalendarService} from "../../shared/services/calendar.service";
 
 @Component({
   selector: 'app-shift-create',
@@ -16,6 +18,7 @@ import {PendingShift} from '../../shared/models/pendingshift-model';
 })
 export class ShiftCreateComponent implements OnInit {
 
+  currentDate: Date;
   shiftForm = this.fb.group({
     date: [''],
     timeStart: [''],
@@ -28,10 +31,13 @@ export class ShiftCreateComponent implements OnInit {
               private router: Router,
               private shiftService: ShiftService,
               private routeService: RouteService,
-              private pShiftService: PendingShiftService
+              private pShiftService: PendingShiftService,
+              public cService: CalendarService
               ) { }
 
   ngOnInit() {
+    this.currentDate = this.cService.getCalendarDate();
+    this.shiftForm.get('date').patchValue(new Date(moment(this.currentDate).format('dd-MM-yyyy')));
   }
 
   save() {
