@@ -12,6 +12,8 @@ import { ShiftOverviewComponent } from './shift/shift-overview/shift-overview.co
 import { ShiftUpdateComponent } from './shift/shift-update/shift-update.component';
 import { TestComponent } from './login/test/test.component';
 import {HttpClientModule} from '@angular/common/http';
+import {CalendarService} from "./shared/services/calendar.service";
+import { PshiftViewComponent } from './shift/calendar-day/pshift-view/pshift-view.component';
 
 import { NavbarComponent } from './shared/navbar/navbar.component';
 
@@ -29,7 +31,8 @@ import { UserPageComponent } from './user/user-page/user-page.component';
     ShiftUpdateComponent,
     TestComponent,
     NavbarComponent,
-    UserPageComponent
+    UserPageComponent,
+    PshiftViewComponent
 
 
   ],
@@ -40,7 +43,7 @@ import { UserPageComponent } from './user/user-page/user-page.component';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CalendarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
