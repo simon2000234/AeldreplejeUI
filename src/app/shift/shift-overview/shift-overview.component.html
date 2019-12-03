@@ -25,7 +25,7 @@
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
         <div *ngIf="!day.isEmpty">
           <div *ngFor="let shift of day.pendingShifts">
-            <p class="m-0">{{shift.shift.route.name}}</p>
+            <p class="m-0">{{shift.shift.timeStart}}</p>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
         <div *ngIf="!day.isEmpty">
           <div *ngFor="let shift of day.pendingShifts">
-            <p class="m-0">{{shift.shift.route.name}}</p>
+            <p class="m-0">{{shift.shift.timeStart}}</p>
           </div>
         </div>
       </div>
