@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
     });
 
     // reset login status
-    this.authenticationService.logout();
   }
   // Getters for easy access to form fields
   get username() { return this.loginForm.get('username'); }
@@ -32,6 +31,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.authenticationService.logout();
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
