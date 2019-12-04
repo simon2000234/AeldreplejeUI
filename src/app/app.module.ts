@@ -30,11 +30,9 @@ import { UserPageComponent } from './user/user-page/user-page.component';
     ShiftOverviewComponent,
     ShiftUpdateComponent,
     TestComponent,
+    PshiftViewComponent,
     NavbarComponent,
-    UserPageComponent,
-    PshiftViewComponent
-
-
+    UserPageComponent
   ],
   imports: [
     BrowserModule,
