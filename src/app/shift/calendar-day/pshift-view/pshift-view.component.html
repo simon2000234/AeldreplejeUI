@@ -12,8 +12,8 @@
             <br>
             {{pShift.users[0].id}}
           </p>
-          <a href="#" class="card-link">Update</a>
-          <a href="#" class="card-link float-right">Delete</a>
+          <button routerLink="/shift-update/{{pShift.id}}" class="btn btn-primary float-left" >Update</button>
+          <button class="btn btn-danger float-right" (click)="Delete(pShift)">Delete</button>
         </div>
       </div>
   </div>
