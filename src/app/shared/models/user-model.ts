@@ -3,11 +3,11 @@ import {Shift} from './shift-model';
 
 export interface User {
   id: number;
-  name: string;
-  Role: string;
-  email: string;
+  name?: string;
+  Role?: string;
+  email?: string;
   group?: Group;
-  profilePicture: string;
-  shifts: Shift[];
+  profilePicture?: string;
+  shifts?: Shift[];
 
 }
