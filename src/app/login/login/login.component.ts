@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   errormessage = '';
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService) { }z
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -44,10 +44,12 @@ export class LoginComponent implements OnInit {
         success => {
           this.router.navigate(['/']);
           this.loading = false;
+          window.location.reload();
         },
         error => {
           this.errormessage = error.message;
           this.loading = false;
         });
+
   }
 }

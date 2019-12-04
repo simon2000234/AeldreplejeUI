@@ -1,30 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">
-   Title
-  </a>
-  <button class="navbar-toggler" type="button">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse">
-    <ul class="navbar-nav mr-auto">
-      <ul>
-        <li><a routerLink="login"> Login</a></li>
-      </ul>
-      <ul>
-        <li><a routerLink="shift-overview"> shift-overview</a></li>
-      </ul>
-      <ul>
-        <li><a routerLink="shift-create"> shift-create</a></li>
-      </ul>
-      <ul>
-        <li><a routerLink="shift-update"> shift-update</a></li>
-      </ul>
-      <ul>
-        <li><a routerLink="pending-calendar-shift"> pending-calendar-shift</a></li>
-      </ul>
-      <ul>
-        <li><a routerLink="user"> user</a></li>
-      </ul>
+<nav>
+  <div class="">
+    <ul class="nav nav-pills nav-tabs space">
+      <img src="https://cache.nichehuset.dk/annoncer/jobannoncer/images/annoncoerer/logoer/519/676.png" class="rounded-left float-left logoimage">
+    <li class="nav-item">
+      <a class="nav-link " a routerLink="shift-overview"  >Kalender</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " a routerLink="user"  >Brugere</a>
+    </li>
+    <li class="nav-item">
+    <li>
+      <a class="nav-link  " a routerLink="login"  >login</a>
+
+    </li>
+
+
+        <img src="{{cUser.profilePicture}}" class="rounded float-right profileimage">
+      <a class="nav-link disabled" >{{cUser.name}}</a>
+      <a class="nav-link disabled" >{{cUser.email}}</a>
 
     </ul>
   </div>
