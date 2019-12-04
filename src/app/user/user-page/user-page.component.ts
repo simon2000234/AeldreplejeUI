@@ -17,10 +17,15 @@ export class UserPageComponent implements OnInit {
   cUser: User;
   setToChosen(ps: PendingShift): void {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.userService.getUser(currentUser.id).subscribe(u => {this.cUser = u;
+    ps.users.push({
+      userId: currentUser.id,
+      pendingShiftId: ps.id
+    });
+    this.pendingShiftService.updatePendingShift(ps).subscribe();
+    /*this.userService.getUser(currentUser.id).subscribe(u => {this.cUser = u;
                                                              ps.users.push(this.cUser);
                                                              this.pendingShiftService.updatePendingShift(ps).subscribe();
-    });
+    });*/
   }
 
 

@@ -41,25 +41,16 @@ export class PendingShiftService {
     return this.http.post<PendingShift>(this.apiUrl, pendingShift, httpOptions);
   }
   updatePendingShift(pendingshift: PendingShift): Observable<PendingShift> {
-    const pendingShiftToReturn = {
-      Id: pendingshift.id,
-      Shift: {Id : pendingshift.shift.id},
-      Users: []
-    };
-    pendingshift.users.forEach(user => {
-      if (user.id === undefined) {
-      pendingShiftToReturn.Users.push({
-        User: {Id: user.userId}, PendingShift: {Id: pendingshift.id}
-      });
-    } else {
-        pendingShiftToReturn.Users.push({
-          User: {Id: user.id}, PendingShift: {Id: pendingshift.id}
-        });
-      }});
+    pendingshift.users.forEach(user => user.pendingShift = {id: user.pendingShiftId});
+    pendingshift.users.forEach(user => user.user = {id: user.userId});
+    pendingshift.users.forEach(user => user.userId = undefined);
+    pendingshift.users.forEach(user => user.pendingShiftId = undefined);
+    pendingshift.shift = {id: pendingshift.shift.id};
+    pendingshift.shiftId = undefined;
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
     const url = `${this.apiUrl}/${pendingshift.id}`;
-    return this.http.put<any>(url, pendingShiftToReturn, httpOptions);
+    return this.http.put<any>(url, pendingshift, httpOptions);
   }
   deletePendingShift(id: number): Observable<any> {
     httpOptions.headers =
