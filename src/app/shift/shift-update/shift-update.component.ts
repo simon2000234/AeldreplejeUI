@@ -72,14 +72,7 @@ export class ShiftUpdateComponent implements OnInit {
         this.shiftService.updateShift(shiftToUpdate)
           .subscribe(stu => {
             shiftToUpdate = stu;
-            const pShiftToUpdate: PendingShift = {
-              id: this.id,
-              shift: {id: shiftToUpdate.id}
-            };
-            this.pShiftService.updatePendingShift(pShiftToUpdate)
-              .subscribe(() => {
-                this.router.navigateByUrl('/shift-overview');
-              });
+            this.router.navigateByUrl('/shift-overview');
           });
       });
   }

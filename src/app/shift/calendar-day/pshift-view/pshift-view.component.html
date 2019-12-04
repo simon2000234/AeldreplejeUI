@@ -9,9 +9,12 @@
             Start: {{pShift.shift.timeStart.toString().slice(11,19)}}
             <br>
             End: {{pShift.shift.timeEnd.toString().slice(11,19)}}
-            <br>
-            {{pShift.users[0].user.id}}
           </p>
+          <div *ngIf="pShift.users.length>0">
+            <p *ngFor="let user of pShift.users">
+              {{user.user.name}}
+            </p>
+          </div>
           <button routerLink="/shift-update/{{pShift.id}}" class="btn btn-primary float-left" >Update</button>
           <button class="btn btn-danger float-right" (click)="Delete(pShift)">Delete</button>
         </div>
