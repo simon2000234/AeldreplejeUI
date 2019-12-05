@@ -8,6 +8,7 @@ import {ShiftRoute} from '../../shared/models/route-model';
 import {Shift} from '../../shared/models/shift-model';
 import {PendingShift} from '../../shared/models/pendingshift-model';
 import {CalendarService} from "../../shared/services/calendar.service";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-shift-update',
@@ -16,13 +17,13 @@ import {CalendarService} from "../../shared/services/calendar.service";
 })
 export class ShiftUpdateComponent implements OnInit {
 
+  startTimes: any = ['15:00', '15:30', '16:00', '16:30'];
+  endTimes: any = ['23:00'];
   shiftForm = this.fb.group({
     date: [''],
     timeStart: [''],
     timeEnd: [''],
-    route: [''],
-    activeRoute: [''],
-    user: ['']
+    route: ['']
   });
   currentDate: Date;
   id: number;
@@ -46,10 +47,21 @@ export class ShiftUpdateComponent implements OnInit {
         this.currentRoute = pshiftFromRest.shift.route;
         this.currentShift = pshiftFromRest.shift;
         this.shiftForm.patchValue({
-          route: pshiftFromRest.shift.route.name,
-          activeRoute: pshiftFromRest.shift.activeRoute
+          route: pshiftFromRest.shift.route.name
             });
       });
+  }
+  changeStart(e) {
+    console.log(e.target.value);
+    this.shiftForm.get('timeStart').setValue(e.target.value, {
+      onlySelf: true
+    });
+  }
+  changeEnd(e) {
+    console.log(e.target.value);
+    this.shiftForm.get('timeEnd').setValue(e.target.value, {
+      onlySelf: true
+    });
   }
 
   save() {
@@ -64,9 +76,14 @@ export class ShiftUpdateComponent implements OnInit {
         let shiftToUpdate: Shift = {
           id: this.currentShift.id,
           date: new Date(shiftFromFields.date),
-          timeStart: new Date(shiftFromFields.timeStart),
-          timeEnd: new Date(shiftFromFields.timeEnd),
-          activeRoute: shiftFromFields.activeRoute,
+          timeStart: new Date(moment(shiftFromFields.date)
+            .hours(shiftFromFields.timeStart.substr(3, 2))
+            .add(1, 'hours')
+            .minutes(shiftFromFields.timeStart.substr(6, 2)).toDate()),
+          timeEnd: new Date(moment(shiftFromFields.date)
+            .hours(shiftFromFields.timeEnd.substr(3, 2))
+            .add(0, 'hours')
+            .minutes(shiftFromFields.timeEnd.substr(6, 2)).toDate()),
           route: {id: shiftRoute.id}
         };
         this.shiftService.updateShift(shiftToUpdate)

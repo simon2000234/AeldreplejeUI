@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h1 class="col-12 text-center">Pending Shifts - {{chosenDate.toString().slice(0,10)}}</h1>
-      <div class="card" style="width: 18rem;" *ngFor="let pShift of PShifts">
+      <div class="card m-1 shiftCard" style="width: 18rem;" *ngFor="let pShift of PShifts">
         <div class="card-body">
           <h5 class="card-title">{{pShift.shift.date.toString().slice(0,10)}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{pShift.shift.route.name}}</h6>

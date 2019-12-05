@@ -7,28 +7,27 @@
     </div>
 
     <div class="form-group">
-      <label>Start tidspunkt</label>
-      <input type="date" class="form-control" formControlName="timeStart">
+      <label>Start tid</label>
+      <select class="custom-select" (change)="changeStart($event)" formControlName="timeStart">
+        <option value="" disabled>Vælg vagtens start tid</option>
+        <option *ngFor="let start of startTimes" [ngValue]="start">{{start}}</option>
+      </select>
     </div>
 
     <div class="form-group">
-      <label>Slut tidspunkt</label>
-      <input type="date" class="form-control" formControlName="timeEnd">
+      <label>Slut tid</label>
+      <select class="custom-select" (change)="changeEnd($event)" formControlName="timeEnd">
+        <option value="" disabled>Vælg vagtens slut tid</option>
+        <option *ngFor="let end of endTimes" [ngValue]="end">{{end}}</option>
+      </select>
     </div>
 
     <div class="form-group">
       <label>Route</label>
-      <input type="text" class="form-control" formControlName="route">
-    </div>
-
-    <div class="form-group">
-      <label>Active Route</label>
-      <input type="checkbox" class="form-control" formControlName="activeRoute">
-    </div>
-
-    <div class="form-group">
-      <label>Bruger</label>
-      <input type="number" class="form-control" formControlName="user">
+      <select class="custom-select" (change)="changeRoute($event)" formControlName="route">
+        <option value="" disabled>Vælg route</option>
+        <option *ngFor="let route of tempRoutes" [ngValue]="route">{{route}}</option>
+      </select>
     </div>
 
     <div class="for m-group">
