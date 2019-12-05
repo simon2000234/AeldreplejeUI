@@ -14,22 +14,37 @@ export class UserPageComponent implements OnInit {
 
   constructor(private pendingShiftService: PendingShiftService, private userService: UserService) { }
   pShifts: PendingShift[];
-  cUser: User;
+  currentUserId: number;
   setToChosen(ps: PendingShift): void {
-    if (window.confirm('er du sikker på at du ka tage denne vagt')){
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    ps.users.push({
-      userId: currentUser.id,
-      pendingShiftId: ps.id
-    });
-    this.pendingShiftService.updatePendingShift(ps).subscribe();
-    /*this.userService.getUser(currentUser.id).subscribe(u => {this.cUser = u;
-                                                             ps.users.push(this.cUser);
-                                                             this.pendingShiftService.updatePendingShift(ps).subscribe();
-    });*/}
+    if (window.confirm('er du sikker på at du ka tage denne vagt')) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      ps.users.push({
+        userId: currentUser.id,
+        pendingShiftId: ps.id
+      });
+      this.pendingShiftService.updatePendingShift(ps).subscribe();
+    }
   }
 
-
+  removeFromChosen(ps: PendingShift): void {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    for (let i = 0; i < ps.users.length; i++) {
+      if (ps.users[i].userId === currentUser.id && ps.users[i].pendingShiftId === ps.id) {
+        ps.users.splice(i, 1);
+      }
+    }
+    this.pendingShiftService.updatePendingShift(ps).subscribe();
+  }
+isCurrentUserOnPendingShift(): boolean {
+    for (const pShift of this.pShifts) {
+      for (const usp of pShift.users) {
+        if (usp.userId === this.currentUserId) {
+          return false;
+        }
+      }
+      return true;
+    }
+}
   getPendingShifts(): void {
 this.pendingShiftService.getPendingShifts()
 .subscribe(pShifts => this.pShifts = pShifts);
@@ -37,6 +52,7 @@ this.pendingShiftService.getPendingShifts()
 
 
   ngOnInit() {
+    this.currentUserId = JSON.parse(localStorage.getItem('currentUser')).id;
     this.getPendingShifts();
   }
 
