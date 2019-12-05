@@ -22,7 +22,7 @@ export class UserPageComponent implements OnInit {
         userId: currentUser.id,
         pendingShiftId: ps.id
       });
-      this.pendingShiftService.updatePendingShift(ps).subscribe(location.reload);
+      this.pendingShiftService.updatePendingShift(ps).subscribe();
     }
   }
 
