@@ -16,12 +16,14 @@ export class UserPageComponent implements OnInit {
   pShifts: PendingShift[];
   currentUserId: number;
   setToChosen(ps: PendingShift): void {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    ps.users.push({
-      userId: currentUser.id,
-      pendingShiftId: ps.id
-    });
-    this.pendingShiftService.updatePendingShift(ps).subscribe(location.reload);
+    if (window.confirm('er du sikker på at du ka tage denne vagt')) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      ps.users.push({
+        userId: currentUser.id,
+        pendingShiftId: ps.id
+      });
+      this.pendingShiftService.updatePendingShift(ps).subscribe(location.reload);
+    }
   }
 
   removeFromChosen(ps: PendingShift): void {
