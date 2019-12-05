@@ -22,7 +22,9 @@ export class UserPageComponent implements OnInit {
         userId: currentUser.id,
         pendingShiftId: ps.id
       });
-      this.pendingShiftService.updatePendingShift(ps).subscribe();
+      this.pendingShiftService.updatePendingShift(ps).subscribe(() => {
+        this.getPendingShifts();
+      });
     }
   }
 
@@ -33,17 +35,17 @@ export class UserPageComponent implements OnInit {
         ps.users.splice(i, 1);
       }
     }
-    this.pendingShiftService.updatePendingShift(ps).subscribe();
+    this.pendingShiftService.updatePendingShift(ps).subscribe(() => {
+      this.getPendingShifts();
+    });
   }
-isCurrentUserOnPendingShift(): boolean {
-    for (const pShift of this.pShifts) {
+isCurrentUserOnPendingShift(pShift: PendingShift): boolean {
       for (const usp of pShift.users) {
         if (usp.userId === this.currentUserId) {
           return false;
         }
       }
       return true;
-    }
 }
   getPendingShifts(): void {
 this.pendingShiftService.getPendingShifts()
