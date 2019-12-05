@@ -16,6 +16,7 @@ export class UserPageComponent implements OnInit {
   pShifts: PendingShift[];
   cUser: User;
   setToChosen(ps: PendingShift): void {
+    if (window.confirm('er du sikker på at du ka tage denne vagt')){
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     ps.users.push({
       userId: currentUser.id,
@@ -25,7 +26,7 @@ export class UserPageComponent implements OnInit {
     /*this.userService.getUser(currentUser.id).subscribe(u => {this.cUser = u;
                                                              ps.users.push(this.cUser);
                                                              this.pendingShiftService.updatePendingShift(ps).subscribe();
-    });*/
+    });*/}
   }
 
 
