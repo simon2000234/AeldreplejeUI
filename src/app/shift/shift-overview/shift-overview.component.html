@@ -13,16 +13,16 @@
       <div *ngIf="(now.toDateString()===day.calendarDate.toDateString())"
            class="card-body pb-0 pt-2 currentDate" (click)="clickAction(day)">
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
-        <div *ngIf="!day.isEmpty">
+        <div *ngIf="!day.isEmpty" class="text-center">
           <div *ngFor="let shift of day.pendingShifts">
             <p class="m-0 emptyShift text-white" *ngIf="shift.users.length<=0 && !shift.shift.user">
-              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 16)}}
             </p>
             <p class="m-0 UsersOnPShift" *ngIf="shift.users.length>0 && !shift.shift.user">
-              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 16)}}
             </p>
             <p class="m-0 UserOnShift" *ngIf="shift.shift.user">
-              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 16)}}
             </p>
           </div>
         </div>
@@ -31,16 +31,16 @@
       <div *ngIf="(currentMonthSelected.getMonth()!=day.calendarDate.getMonth())"
            class="card-body pb-0 pt-2 datesOutsideMonth" (click)="clickAction(day)">
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
-        <div *ngIf="!day.isEmpty">
+        <div *ngIf="!day.isEmpty" class="text-center">
           <div *ngFor="let shift of day.pendingShifts">
             <p class="m-0 emptyShift text-white" *ngIf="shift.users.length<=0 && !shift.shift.user">
-              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 16)}}
             </p>
             <p class="m-0 UsersOnPShift" *ngIf="shift.users.length>0 && !shift.shift.user">
-              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 16)}}
             </p>
             <p class="m-0 UserOnShift" *ngIf="shift.shift.user">
-              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 16)}}
             </p>
           </div>
         </div>
@@ -49,16 +49,16 @@
       <div *ngIf="(now.toDateString()!==day.calendarDate.toDateString()) && currentMonthSelected.getMonth()===day.calendarDate.getMonth()"
            class="card-body pb-0 pt-2" (click)="clickAction(day)">
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
-        <div *ngIf="!day.isEmpty">
+        <div *ngIf="!day.isEmpty" class="text-center">
           <div *ngFor="let shift of day.pendingShifts">
             <p class="m-0 emptyShift text-white" *ngIf="shift.users.length<=0 && !shift.shift.user">
-            {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+            {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 16)}}
             </p>
             <p class="m-0 UsersOnPShift" *ngIf="shift.users.length>0 && !shift.shift.user">
-              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 16)}}
             </p>
             <p class="m-0 UserOnShift" *ngIf="shift.shift.user">
-              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 16)}}
             </p>
           </div>
         </div>
