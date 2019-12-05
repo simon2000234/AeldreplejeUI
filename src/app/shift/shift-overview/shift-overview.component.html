@@ -15,7 +15,15 @@
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
         <div *ngIf="!day.isEmpty">
           <div *ngFor="let shift of day.pendingShifts">
-            <p class="m-0">{{shift.shift.timeStart}}</p>
+            <p class="m-0 emptyShift text-white" *ngIf="shift.users.length<=0 && !shift.shift.user">
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+            </p>
+            <p class="m-0 UsersOnPShift" *ngIf="shift.users.length>0 && !shift.shift.user">
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+            </p>
+            <p class="m-0 UserOnShift" *ngIf="shift.shift.user">
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+            </p>
           </div>
         </div>
       </div>
@@ -25,7 +33,15 @@
         <h4 class="card-title">{{day.calendarDate.toDateString().slice(7 , 10)}}, {{day.calendarDate.toDateString().slice(0,3)}}</h4>
         <div *ngIf="!day.isEmpty">
           <div *ngFor="let shift of day.pendingShifts">
-            <p class="m-0">{{shift.shift.timeStart}}</p>
+            <p class="m-0 emptyShift text-white" *ngIf="shift.users.length<=0 && !shift.shift.user">
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+            </p>
+            <p class="m-0 UsersOnPShift" *ngIf="shift.users.length>0 && !shift.shift.user">
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+            </p>
+            <p class="m-0 UserOnShift" *ngIf="shift.shift.user">
+              {{shift.shift.route.name}} - {{shift.shift.timeStart.toString().slice(11, 19)}}
+            </p>
           </div>
         </div>
       </div>
