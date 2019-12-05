@@ -38,6 +38,7 @@ export class ShiftCreateComponent implements OnInit {
 
   ngOnInit() {
     this.currentDate = this.cService.getCalendarDate();
+    this.shiftForm.controls.date.setValue(this.currentDate.toISOString().substring(0, 10));
   }
 
   changeStart(e) {
@@ -61,7 +62,8 @@ export class ShiftCreateComponent implements OnInit {
 
   save() {
     const shiftFromFields = this.shiftForm.value;
-    let shiftRoute: ShiftRoute = {name: shiftFromFields.route.substr(0)};
+    const routeNameFix = shiftFromFields.route.indexOf('M');
+    let shiftRoute: ShiftRoute = {name: shiftFromFields.route.substr(routeNameFix)};
 
     this.routeService.addShiftRoute(shiftRoute)
       .subscribe(sr => {
@@ -71,11 +73,15 @@ export class ShiftCreateComponent implements OnInit {
           timeStart: new Date(moment(shiftFromFields.date)
             .hours(shiftFromFields.timeStart.substr(3, 2))
             .add(1, 'hours')
-            .minutes(shiftFromFields.timeStart.substr(6, 2)).toDate()),
+            .minutes(shiftFromFields.timeStart.substr(6, 2))
+            .seconds(0)
+            .toDate()),
           timeEnd: new Date(moment(shiftFromFields.date)
             .hours(shiftFromFields.timeEnd.substr(3, 2))
             .add(1, 'hours')
-            .minutes(shiftFromFields.timeEnd.substr(6, 2)).toDate()),
+            .minutes(shiftFromFields.timeEnd.substr(6, 2))
+            .seconds(0)
+            .toDate()),
           route: {id: shiftRoute.id}
         };
         this.shiftService.addShift(shiftToCreate)

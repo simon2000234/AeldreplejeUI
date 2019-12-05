@@ -2,7 +2,7 @@
   <form [formGroup]="shiftForm" (ngSubmit)="save()">
 
     <div class="form-group">
-      <label>Dato: {{currentDate.toString().slice(0, 15)}}</label>
+      <label>Dato</label>
       <input type="date" class="form-control" formControlName="date">
     </div>
 
@@ -24,7 +24,10 @@
 
     <div class="form-group">
       <label>Route</label>
-      <input type="text" class="form-control" formControlName="route">
+      <select class="custom-select" (change)="changeRoute($event)" formControlName="route">
+        <option value="" disabled>Vælg route</option>
+        <option *ngFor="let route of tempRoutes" [ngValue]="route">{{route}}</option>
+      </select>
     </div>
 
     <div class="for m-group">
