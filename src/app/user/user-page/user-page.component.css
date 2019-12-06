@@ -1,0 +1,25 @@
+.cardBackground {
+  background: #007ab8;
+  border: #007ab8 solid 1px;
+}
+
+.buttonSBackground {
+  min-width: 100%;
+   background: #c8ffc8;
+   color: #007ab8;
+}
+.buttonSBackground:hover {
+  background: rgba(0,195,0,0.8);
+  color: white;
+}
+.buttonEBackground {
+  min-width: 100%;
+  background: #ffc8c8;
+  color: #007ab8;
+}
+.buttonEBackground:hover {
+  background: rgba(255,0,0,0.8);
+  color: white;
+}
+
+
