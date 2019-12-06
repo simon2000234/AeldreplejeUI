@@ -2,27 +2,17 @@
 <ul class="PendingShift">
   <div *ngFor="let PendingShift of pShifts">
 
-    <div *ngIf="PendingShift.users.length > 0" class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+    <div class="card text-black bg-info mb-3" style="max-width: 18rem;">
       <h5 class="card-title">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
       <h6 class="card-subtitle ">
         {{PendingShift.shift.timeStart.toString().slice(11, 16)}} - {{PendingShift.shift.timeEnd.toString().slice(11, 16)}}
       </h6>
-      <p class="card-te xt">Vagten er åben</p>
-      <button *ngIf="isCurrentUserOnPendingShift()" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=setToChosen(PendingShift)>
+      <p *ngIf="isCurrentUserOnPendingShift(PendingShift)" class="card-te xt">Du er skreven op på vagten</p>
+      <p *ngIf="!isCurrentUserOnPendingShift(PendingShift)" class="card-te xt">Vagten er åben</p>
+      <button *ngIf="isCurrentUserOnPendingShift(PendingShift)" type="button" class="btn text-black btn-info btn-outline-dark" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=setToChosen(PendingShift)>
           jeg kan tage den
       </button>
-      <button *ngIf="!isCurrentUserOnPendingShift(PendingShift)" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=removeFromChosen(PendingShift)>
-        Fjern mig fra den
-      </button>
-    </div>
-    <div *ngIf="PendingShift.users.length <= 0" class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-      <h5 class="card-title">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
-      <h6 class="card-subtitle ">{{PendingShift.shift.timeEnd.toString().slice(0, 10)}}</h6>
-      <p class="card-te xt">Vagten er åben.</p>
-      <button *ngIf="isCurrentUserOnPendingShift(PendingShift)" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=setToChosen(PendingShift)>
-        jeg kan tage den
-      </button>
-      <button *ngIf="!isCurrentUserOnPendingShift(PendingShift)" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=removeFromChosen(PendingShift)>
+      <button *ngIf="!isCurrentUserOnPendingShift(PendingShift)" type="button" class="btn text-black btn-info btn-outline-dark" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=removeFromChosen(PendingShift)>
         Fjern mig fra den
       </button>
     </div>
