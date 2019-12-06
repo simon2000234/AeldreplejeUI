@@ -4,7 +4,7 @@ import {PendingShift} from '../../shared/models/pendingshift-model';
 import {User} from '../../shared/models/user-model';
 import {PendingShiftService} from '../../shared/services/pending-shift.service';
 import {UserPendingShift} from '../../shared/models/user-pending-shift-model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ShiftService} from '../../shared/services/shift.service';
 import {Shift} from '../../shared/models/shift-model';
 
@@ -16,7 +16,10 @@ import {Shift} from '../../shared/models/shift-model';
 })
 export class ShiftChooseComponent implements OnInit {
 
-  constructor(private pendingShiftService: PendingShiftService, private route: ActivatedRoute, private shiftService: ShiftService) {
+  constructor(private pendingShiftService: PendingShiftService,
+              private route: ActivatedRoute,
+              private shiftService: ShiftService,
+              private navigator: Router) {
   }
   pShift: PendingShift;
   id: number;
@@ -36,7 +39,7 @@ saveShift(user: User): void {
 
 updateShift(shift: Shift, user: User): void {
   shift.user = user;
-  this.shiftService.updateShift(shift).subscribe();
+  this.shiftService.updateShift(shift).subscribe(s => this.navigator.navigateByUrl('shift-overview'));
 }
 
   ngOnInit() {
