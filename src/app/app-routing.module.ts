@@ -13,7 +13,7 @@ import {PshiftViewComponent} from './shift/calendar-day/pshift-view/pshift-view.
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'shift-create', component: ShiftCreateComponent, canActivate: [AuthGuard]},
-  {path: 'shift-update', component: ShiftUpdateComponent, canActivate: [AuthGuard]},
+  {path: 'shift-update/:id', component: ShiftUpdateComponent, canActivate: [AuthGuard]},
   {path: 'shift-overview', component: ShiftOverviewComponent, canActivate: [AuthGuard]},
   {path: 'pending-calendar-shift', component: PshiftViewComponent},
   {path: 'login', component: LoginComponent},

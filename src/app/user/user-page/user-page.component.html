@@ -11,7 +11,7 @@
       <button *ngIf="isCurrentUserOnPendingShift()" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=setToChosen(PendingShift)>
           jeg kan tage den
       </button>
-      <button *ngIf="!isCurrentUserOnPendingShift()" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=removeFromChosen(PendingShift)>
+      <button *ngIf="!isCurrentUserOnPendingShift(PendingShift)" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=removeFromChosen(PendingShift)>
         Fjern mig fra den
       </button>
     </div>
@@ -19,10 +19,10 @@
       <h5 class="card-title">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
       <h6 class="card-subtitle ">{{PendingShift.shift.timeEnd.toString().slice(0, 10)}}</h6>
       <p class="card-te xt">Vagten er åben.</p>
-      <button *ngIf="isCurrentUserOnPendingShift()" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=setToChosen(PendingShift)>
+      <button *ngIf="isCurrentUserOnPendingShift(PendingShift)" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=setToChosen(PendingShift)>
         jeg kan tage den
       </button>
-      <button *ngIf="!isCurrentUserOnPendingShift()" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=removeFromChosen(PendingShift)>
+      <button *ngIf="!isCurrentUserOnPendingShift(PendingShift)" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=removeFromChosen(PendingShift)>
         Fjern mig fra den
       </button>
     </div>

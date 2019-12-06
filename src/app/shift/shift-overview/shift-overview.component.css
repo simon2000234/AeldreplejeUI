@@ -39,3 +39,18 @@
   background: rgba(172,175,174,0.1);
   color: #bebebe;
 }
+
+.emptyShift {
+  background: #ff0000;
+  border: white solid 1px;
+}
+
+.UsersOnPShift {
+  background: #ffff00;
+  border: white solid 1px;
+}
+
+.UserOnShift {
+  background: #00ff00;
+  border: white solid 1px;
+}
