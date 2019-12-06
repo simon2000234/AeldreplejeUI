@@ -1,20 +1,33 @@
-<p></p>
-<ul class="PendingShift">
-  <div *ngFor="let PendingShift of pShifts">
-
-    <div class="card text-black bg-info mb-3" style="max-width: 18rem;">
-      <h5 class="card-title">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
-      <h6 class="card-subtitle ">
-        {{PendingShift.shift.timeStart.toString().slice(11, 16)}} - {{PendingShift.shift.timeEnd.toString().slice(11, 16)}}
+<div class="container">
+  <h1 class="text-center">Ledige Vagter</h1>
+  <div class="row justify-content-center" *ngFor="let PendingShift of pShifts">
+    <div *ngIf="!isCurrentUserOnPendingShift(PendingShift)" class="col-3 card mb-3 p-0 cardBackground text-white text-center">
+      <div class="card-body p-0">
+    <h5 class="card-title m-1">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
+    <h6 class="card-subtitle m-1 ">
+      {{PendingShift.shift.route.name}}:
+      {{PendingShift.shift.timeStart.toString().slice(11, 16)}} -
+      {{PendingShift.shift.timeEnd.toString().slice(11, 16)}}
+    </h6>
+    <p class="card-text m-1">Du har budt på denne vagt</p>
+    <button type="button" class="btn buttonEBackground mt-1" data-toggle="button" aria-pressed="false" (click)=removeFromChosen(PendingShift)>
+      Slet mig fra vagten
+    </button>
+      </div>
+  </div>
+    <div *ngIf="isCurrentUserOnPendingShift(PendingShift)" class="col-3 card cardBackground p-0 text-white mb-3 text-center">
+      <div class="card-body p-0">
+      <h5 class="card-title m-1">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
+      <h6 class="card-subtitle m-1">
+        {{PendingShift.shift.route.name}}:
+        {{PendingShift.shift.timeStart.toString().slice(11, 16)}} -
+        {{PendingShift.shift.timeEnd.toString().slice(11, 16)}}
       </h6>
-      <p *ngIf="isCurrentUserOnPendingShift(PendingShift)" class="card-te xt">Du er skreven op på vagten</p>
-      <p *ngIf="!isCurrentUserOnPendingShift(PendingShift)" class="card-te xt">Vagten er åben</p>
-      <button *ngIf="isCurrentUserOnPendingShift(PendingShift)" type="button" class="btn text-black btn-info btn-outline-dark" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=setToChosen(PendingShift)>
-          jeg kan tage den
+      <p class="card-text m-1">Du har ikke budt på denne vagt</p>
+      <button type="button mt-1" class="btn buttonSBackground" data-toggle="button" aria-pressed="false" autocomplete="off" (click)="setToChosen(PendingShift)">
+        Tilføj mig til vagten
       </button>
-      <button *ngIf="!isCurrentUserOnPendingShift(PendingShift)" type="button" class="btn text-black btn-info btn-outline-dark" data-toggle="button" aria-pressed="false" autocomplete="off" (click)=removeFromChosen(PendingShift)>
-        Fjern mig fra den
-      </button>
+      </div>
     </div>
   </div>
-</ul>
+</div>
