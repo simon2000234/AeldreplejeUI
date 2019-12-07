@@ -15,6 +15,7 @@ import {CalendarService} from './shared/services/calendar.service';
 import { PshiftViewComponent } from './shift/calendar-day/pshift-view/pshift-view.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { UserPageComponent } from './user/user-page/user-page.component';
+import { ShiftChooseComponent } from './shift/shift-choose/shift-choose.component';
 
 
 
@@ -30,6 +31,7 @@ import { UserPageComponent } from './user/user-page/user-page.component';
     PshiftViewComponent,
     NavbarComponent,
     UserPageComponent,
+    ShiftChooseComponent,
   ],
   imports: [
     BrowserModule,
