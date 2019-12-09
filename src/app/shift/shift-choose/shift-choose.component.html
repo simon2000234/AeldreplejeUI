@@ -2,11 +2,17 @@
   <div class="row justify-content-center">
     <div class="col-3 card p-1 users-card" *ngFor="let user of pShift.users">
     <img src="{{user.user.profilePicture}}" class="card-img-top" alt="">
-    <div class="card-body">
+    <div class="card-body bg-warning mb-3" *ngIf="checkIfShiftIsOnSameDay(user.user)">
       <h5 class="card-title">{{user.user.name}}</h5>
       <p class="card-text">{{user.user.email}}</p>
+      <p >Medarbejderen har allerede en booking på den her dag</p>
       <button class="btn users-button" (click)="saveShift(user.user)">Vælg</button>
     </div>
+      <div class="card-body" *ngIf="!checkIfShiftIsOnSameDay(user.user)">
+        <h5 class="card-title">{{user.user.name}}</h5>
+        <p class="card-text">{{user.user.email}}</p>
+        <button class="btn users-button" (click)="saveShift(user.user)">Vælg</button>
+      </div>
 </div>
   </div>
 </div>

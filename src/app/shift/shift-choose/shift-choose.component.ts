@@ -7,6 +7,7 @@ import {UserPendingShift} from '../../shared/models/user-pending-shift-model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ShiftService} from '../../shared/services/shift.service';
 import {Shift} from '../../shared/models/shift-model';
+import {CalendarService} from '../../shared/services/calendar.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class ShiftChooseComponent implements OnInit {
   constructor(private pendingShiftService: PendingShiftService,
               private route: ActivatedRoute,
               private shiftService: ShiftService,
-              private navigator: Router) {
+              private navigator: Router,
+              private calSer: CalendarService) {
   }
   pShift: PendingShift;
   id: number;
@@ -35,6 +37,17 @@ export class ShiftChooseComponent implements OnInit {
 
 saveShift(user: User): void {
     this.shiftService.getShift(this.pShift.shiftId).subscribe(s => this.updateShift(s, user));
+}
+
+checkIfShiftIsOnSameDay(user: User): boolean {
+  for (let i = 0; i < user.shifts.length ; i++) {
+    const d1 = user.shifts[i].date.toString().slice(0, 10);
+    const d2 = this.calSer.calendarDate.toISOString().slice(0, 10);
+    if ( d1 === d2) {
+      return true;
+    }
+  }
+  return false;
 }
 
 updateShift(shift: Shift, user: User): void {

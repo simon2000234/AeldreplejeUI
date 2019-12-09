@@ -10,11 +10,11 @@
             <br>
             End: {{pShift.shift.timeEnd.toString().slice(11,19)}}
           </p>
-          <div *ngIf="pShift.users.length>0">
+          <div *ngIf="pShift.shift.user === null && pShift.users.length > 0">
             <p>Antal bud på vagten: {{pShift.users.length}}</p>
           </div>
-          <div *ngIf="pShift.users.length<=0">
-            <p>Antal bud på vagten: {{pShift.users.length}}</p>
+          <div *ngIf="pShift.shift.user != null">
+            <p>{{pShift.shift.user.name}} har vagten</p>
           </div>
           <button routerLink="/shift-update/{{pShift.id}}" class="btn btn-primary float-left" >Update</button>
           <button *ngIf="pShift.shift.user === null && pShift.users.length > 0"
