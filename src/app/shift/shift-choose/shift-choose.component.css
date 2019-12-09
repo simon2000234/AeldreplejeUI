@@ -2,6 +2,13 @@
   border: #007ab8 solid 2px;
 }
 
+.image-fit {
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
 .users-button {
   border: #007ab8 solid 2px;
   background: #c8ffc8;

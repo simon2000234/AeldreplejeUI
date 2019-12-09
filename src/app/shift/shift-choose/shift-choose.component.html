@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-3 card p-1 users-card" *ngFor="let user of pShift.users">
-    <img src="{{user.user.profilePicture}}" class="card-img-top" alt="">
+    <img src="{{user.user.profilePicture}}" class="card-img-top image-fit">
     <div class="card-body">
       <h5 class="card-title">{{user.user.name}}</h5>
       <p class="card-text">{{user.user.email}}</p>
