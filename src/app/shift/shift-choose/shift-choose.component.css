@@ -2,6 +2,10 @@
   border: #007ab8 solid 2px;
 }
 
+.supBackground {
+  background: #ff550a;
+}
+
 .image-fit {
   width:100%;
   height:100%;
