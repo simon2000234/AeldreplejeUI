@@ -1,3 +1,8 @@
 .input-fill {
   width: 100% !important;
 }
+
+.image-shift {
+  max-width: 100px;
+  height: auto;
+}

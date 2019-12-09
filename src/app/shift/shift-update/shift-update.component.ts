@@ -99,7 +99,9 @@ export class ShiftUpdateComponent implements OnInit {
             .minutes(shiftFromFields.timeEnd.substr(3, 2))
             .seconds(0)
             .toDate()),
-          route: {id: shiftRoute.id}
+          route: {id: shiftRoute.id},
+          user: {id: this.currentShift.user.id}
+
         };
         this.shiftService.updateShift(shiftToUpdate)
           .subscribe(stu => {

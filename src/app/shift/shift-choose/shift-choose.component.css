@@ -1,0 +1,14 @@
+.users-card {
+  border: #007ab8 solid 2px;
+}
+
+.users-button {
+  border: #007ab8 solid 2px;
+  background: #c8ffc8;
+  color: #007ab8;
+}
+
+.users-button:hover {
+  background: rgba(0,195,0,0.8);
+  color: white;
+}

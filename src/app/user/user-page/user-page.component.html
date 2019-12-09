@@ -2,21 +2,10 @@
   <div class="row justify-content-center">
     <div class="col-4">
       <h1 class="text-center">Vagter</h1>
-      <div class="card offset-2 col-8 mb-3 p-0 cardBackground text-white text-center" *ngFor="let shift of shifts">
+      <div *ngFor="let shift of shifts">
+      <div class="card offset-2 col-8 mb-3 p-0 cardBackground text-white text-center" *ngIf="isCurrentUserOnShift(shift)">
 
-        <div class="card-body" *ngIf="isCurrentUserOnShift(shift)">
-          <h5 class="card-title m-1">{{shift.timeStart.toString().slice(0, 10)}}</h5>
-          <h6 class="card-subtitle m-1 ">
-            {{shift.route.name}}<br>
-            {{shift.timeStart.toString().slice(11, 16)}} -
-            {{shift.timeEnd.toString().slice(11, 16)}}
-          </h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-        <!-- Delete this card-body and everything inside when users are available -->
-        <div class="card-body" *ngIf="!isCurrentUserOnShift(shift)">
+        <div class="card-body" >
           <h5 class="card-title m-1">{{shift.timeStart.toString().slice(0, 10)}}</h5>
           <h6 class="card-subtitle m-1 ">
             {{shift.route.name}}<br>
@@ -27,13 +16,14 @@
         </div>
 
       </div>
-
+    </div>
     </div>
     <div class="col-4">
       <h1 class="text-center">Ledige Vagter</h1>
-      <div class="card offset-2 col-8 mb-3 p-0 cardBackground text-white text-center" *ngFor="let PendingShift of pShifts">
+      <div  *ngFor="let PendingShift of pShifts">
+      <div class="card offset-2 col-8 mb-3 p-0 cardBackground text-white text-center" *ngIf="!isCurrentUserOnPendingShift(PendingShift) && PendingShift.shift.user === null">
 
-        <div class="card-body p-0" *ngIf="!isCurrentUserOnPendingShift(PendingShift)">
+        <div class="card-body p-0" >
           <h5 class="card-title m-1">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
           <h6 class="card-subtitle m-1 ">
             {{PendingShift.shift.route.name}}:
@@ -45,8 +35,9 @@
             Slet mig fra vagten
           </button>
         </div>
-
-        <div class="card-body p-0" *ngIf="isCurrentUserOnPendingShift(PendingShift)">
+      </div>
+        <div class="card offset-2 col-8 mb-3 p-0 cardBackground text-white text-center" *ngIf="isCurrentUserOnPendingShift(PendingShift) && PendingShift.shift.user === null">
+        <div class="card-body p-0" >
           <h5 class="card-title m-1">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
           <h6 class="card-subtitle m-1">
             {{PendingShift.shift.route.name}}:
@@ -59,6 +50,7 @@
           </button>
         </div>
 
+      </div>
       </div>
     </div>
   </div>
