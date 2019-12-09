@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-3 card p-1 users-card" *ngFor="let user of pShift.users">
-    <img src="{{user.user.profilePicture}}" class="card-img-top" alt="">
-    <div class="card-body bg-warning mb-3" *ngIf="checkIfShiftIsOnSameDay(user.user)">
+    <div class="col-3 card p-1 users-card m-1" *ngFor="let user of pShift.users">
+    <img src="{{user.user.profilePicture}}" class="card-img-top image-fit">
+    <div class="card-body supBackground" *ngIf="checkIfShiftIsOnSameDay(user.user)">
       <h5 class="card-title">{{user.user.name}}</h5>
       <p class="card-text">{{user.user.email}}</p>
       <p >Medarbejderen har allerede en booking på den her dag</p>
