@@ -17,9 +17,8 @@
             <p>Antal bud på vagten: {{pShift.users.length}}</p>
           </div>
           <button routerLink="/shift-update/{{pShift.id}}" class="btn btn-primary float-left" >Update</button>
-          <div *ngIf="pShift.shift.user == null">
-            <button routerLink="/choose/{{pShift.id}}" class="btn btn-primary" >vælg</button>
-          </div>
+          <button *ngIf="pShift.shift.user === null && pShift.users.length > 0"
+                  routerLink="/choose/{{pShift.id}}" class="btn btn-warning text-white ml-2" >Tildel</button>
           <button class="btn btn-danger float-right" (click)="Delete(pShift)">Delete</button>
         </div>
       </div>
