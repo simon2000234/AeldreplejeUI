@@ -4,6 +4,7 @@ import {PendingShift} from '../../shared/models/pendingshift-model';
 import {Shift} from '../../shared/models/shift-model';
 import {User} from '../../shared/models/user-model';
 import {UserService} from '../../shared/services/user.service';
+import {ShiftService} from '../../shared/services/shift.service';
 
 @Component({
   selector: 'app-user-page',
@@ -12,8 +13,10 @@ import {UserService} from '../../shared/services/user.service';
 })
 export class UserPageComponent implements OnInit {
 
-  constructor(private pendingShiftService: PendingShiftService, private userService: UserService) { }
+  constructor(private pendingShiftService: PendingShiftService, private userService: UserService,
+              private shiftService: ShiftService) { }
   pShifts: PendingShift[];
+  shifts: Shift[];
   currentUserId: number;
   setToChosen(ps: PendingShift): void {
     if (window.confirm('er du sikker på at du ka tage denne vagt')) {
@@ -47,15 +50,26 @@ isCurrentUserOnPendingShift(pShift: PendingShift): boolean {
       }
       return true;
 }
+  isCurrentUserOnShift(shift: Shift): boolean {
+    if (shift.user) {
+      return shift.user.id === this.currentUserId;
+    }
+    return false;
+  }
   getPendingShifts(): void {
 this.pendingShiftService.getPendingShifts()
 .subscribe(pShifts => this.pShifts = pShifts);
+}
+getShifts(): void {
+    this.shiftService.getShifts()
+      .subscribe(s => this.shifts = s);
 }
 
 
   ngOnInit() {
     this.currentUserId = JSON.parse(localStorage.getItem('currentUser')).id;
     this.getPendingShifts();
+    this.getShifts();
   }
 
 }

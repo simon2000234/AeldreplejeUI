@@ -28,7 +28,6 @@ export class PshiftViewComponent implements OnInit {
   }
 
   Delete(pendingShift: PendingShift) {
-    debugger;
     const shiftId = pendingShift.shift.id;
     const routeId = pendingShift.shift.route.id;
     this.pshiftService.deletePendingShift(pendingShift.id)

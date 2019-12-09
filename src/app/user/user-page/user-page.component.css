@@ -1,6 +1,18 @@
 .cardBackground {
   background: #007ab8;
   border: #007ab8 solid 1px;
+  min-height: 124px;
+}
+
+.containerBackground {
+  background: white;
+  border: #007ab8 solid 2px;
+}
+
+.shiftCardStyle {
+  background: white;
+  border: #007ab8 solid 1px;
+  color: #007ab8;
 }
 
 .buttonSBackground {

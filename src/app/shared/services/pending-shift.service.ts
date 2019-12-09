@@ -41,6 +41,7 @@ export class PendingShiftService {
     return this.http.post<PendingShift>(this.apiUrl, pendingShift, httpOptions);
   }
   updatePendingShift(pendingshift: PendingShift): Observable<PendingShift> {
+    debugger;
       pendingshift.users.forEach(user => user.pendingShift = {id: user.pendingShiftId});
       pendingshift.users.forEach(user => user.user = {id: user.userId});
       pendingshift.users.forEach(user => user.userId = undefined);

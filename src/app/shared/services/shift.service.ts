@@ -41,6 +41,7 @@ export class ShiftService {
     return this.http.post<Shift>(this.apiUrl, shift, httpOptions);
   }
   updateShift(shift: Shift): Observable<Shift> {
+    shift.user = {id: shift.user.id};
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 

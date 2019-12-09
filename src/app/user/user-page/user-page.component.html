@@ -1,33 +1,58 @@
-<div class="container">
-  <h1 class="text-center">Ledige Vagter</h1>
-  <div class="row justify-content-center" *ngFor="let PendingShift of pShifts">
-    <div *ngIf="!isCurrentUserOnPendingShift(PendingShift)" class="col-3 card mb-3 p-0 cardBackground text-white text-center">
-      <div class="card-body p-0">
-    <h5 class="card-title m-1">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
-    <h6 class="card-subtitle m-1 ">
-      {{PendingShift.shift.route.name}}:
-      {{PendingShift.shift.timeStart.toString().slice(11, 16)}} -
-      {{PendingShift.shift.timeEnd.toString().slice(11, 16)}}
-    </h6>
-    <p class="card-text m-1">Du har budt på denne vagt</p>
-    <button type="button" class="btn buttonEBackground mt-1" data-toggle="button" aria-pressed="false" (click)=removeFromChosen(PendingShift)>
-      Slet mig fra vagten
-    </button>
+<div class="container-fluid containerBackground">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <h1 class="text-center">Vagter</h1>
+      <div *ngFor="let shift of shifts">
+      <div class="card offset-2 col-8 mb-3 p-0 cardBackground text-white text-center" *ngIf="isCurrentUserOnShift(shift)">
+
+        <div class="card-body" >
+          <h5 class="card-title m-1">{{shift.timeStart.toString().slice(0, 10)}}</h5>
+          <h6 class="card-subtitle m-1 ">
+            {{shift.route.name}}<br>
+            {{shift.timeStart.toString().slice(11, 16)}} -
+            {{shift.timeEnd.toString().slice(11, 16)}}
+          </h6>
+          <p class="card-text"></p>
+        </div>
+
       </div>
-  </div>
-    <div *ngIf="isCurrentUserOnPendingShift(PendingShift)" class="col-3 card cardBackground p-0 text-white mb-3 text-center">
-      <div class="card-body p-0">
-      <h5 class="card-title m-1">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
-      <h6 class="card-subtitle m-1">
-        {{PendingShift.shift.route.name}}:
-        {{PendingShift.shift.timeStart.toString().slice(11, 16)}} -
-        {{PendingShift.shift.timeEnd.toString().slice(11, 16)}}
-      </h6>
-      <p class="card-text m-1">Du har ikke budt på denne vagt</p>
-      <button type="button mt-1" class="btn buttonSBackground" data-toggle="button" aria-pressed="false" autocomplete="off" (click)="setToChosen(PendingShift)">
-        Tilføj mig til vagten
-      </button>
+    </div>
+    </div>
+    <div class="col-4">
+      <h1 class="text-center">Ledige Vagter</h1>
+      <div  *ngFor="let PendingShift of pShifts">
+      <div class="card offset-2 col-8 mb-3 p-0 cardBackground text-white text-center" *ngIf="!isCurrentUserOnPendingShift(PendingShift) && PendingShift.shift.user === null">
+
+        <div class="card-body p-0" >
+          <h5 class="card-title m-1">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
+          <h6 class="card-subtitle m-1 ">
+            {{PendingShift.shift.route.name}}:
+            {{PendingShift.shift.timeStart.toString().slice(11, 16)}} -
+            {{PendingShift.shift.timeEnd.toString().slice(11, 16)}}
+          </h6>
+          <p class="card-text m-1">Du har budt på denne vagt</p>
+          <button type="button" class="btn buttonEBackground mt-1" data-toggle="button" aria-pressed="false" (click)=removeFromChosen(PendingShift)>
+            Slet mig fra vagten
+          </button>
+        </div>
+      </div>
+        <div class="card offset-2 col-8 mb-3 p-0 cardBackground text-white text-center" *ngIf="isCurrentUserOnPendingShift(PendingShift) && PendingShift.shift.user === null">
+        <div class="card-body p-0" >
+          <h5 class="card-title m-1">{{PendingShift.shift.timeStart.toString().slice(0, 10)}}</h5>
+          <h6 class="card-subtitle m-1">
+            {{PendingShift.shift.route.name}}:
+            {{PendingShift.shift.timeStart.toString().slice(11, 16)}} -
+            {{PendingShift.shift.timeEnd.toString().slice(11, 16)}}
+          </h6>
+          <p class="card-text m-1">Du har ikke budt på denne vagt</p>
+          <button type="button mt-1" class="btn buttonSBackground" data-toggle="button" aria-pressed="false" autocomplete="off" (click)="setToChosen(PendingShift)">
+            Tilføj mig til vagten
+          </button>
+        </div>
+
+      </div>
       </div>
     </div>
   </div>
+
 </div>
