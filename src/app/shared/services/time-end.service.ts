@@ -46,7 +46,7 @@ export class TimeEndService {
     const url = `${this.apiUrl}/${timeEnd.id}`;
     return this.http.put<TimeEnd>(url, timeEnd, httpOptions);
   }
-  deleteShift(id: number): Observable<any> {
+  deleteTimeEnd(id: number): Observable<any> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 

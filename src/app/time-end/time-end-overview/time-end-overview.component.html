@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h1>Alle mulige sluttidspunkter</h1>
+  </div>
+  <div class="row justify-content-center">
+    <button routerLink="/time-end-create" class="btn btn-primary col-3 createRouteButton p-1">Lav nyt sluttidspunkt</button>
+  </div>
+  <div class="row mt-3">
+    <div class="card col-2 ml-3 mr-3 mb-3 routeCards" *ngFor="let time of timeEnds">
+      <div class="card-body p-0 pt-3 pb-3">
+        <h5 class="card-title">{{time.timeEnd}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Id: {{time.id}}</h6>
+        <button routerLink="/time-end-update/{{time.id}}" class="btn btn-primary  mr-1">Update</button>
+        <button class="btn btn-danger" (click)="delete(time.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

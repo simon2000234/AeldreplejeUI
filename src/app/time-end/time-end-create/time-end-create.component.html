@@ -1,0 +1,9 @@
+<div class="container">
+  <form class="mt-3" [formGroup]="timeEndForm" (ngSubmit)="save()">
+    <div class="form-group">
+      <label class="labelText">Sluttidspunkt:</label>
+      <input type="text" class="form-control" formControlName="timeEnd" placeholder="Eksempel: 23:30">
+    </div>
+    <button type="submit" class="btn btn-primary">Gem</button>
+  </form>
+</div>

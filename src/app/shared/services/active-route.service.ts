@@ -45,7 +45,7 @@ export class ActiveRouteService {
     const url = `${this.apiUrl}/${activeRoute.id}`;
     return this.http.put<ActiveRoute>(url, activeRoute, httpOptions);
   }
-  deleteGroup(id: number): Observable<any> {
+  deleteActiveRoute(id: number): Observable<any> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 

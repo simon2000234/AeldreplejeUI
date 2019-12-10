@@ -10,6 +10,16 @@ import {AuthGuard} from './shared/guards/auth.guard';
 import {UserPageComponent} from './user/user-page/user-page.component';
 import {PshiftViewComponent} from './shift/calendar-day/pshift-view/pshift-view.component';
 import {ShiftChooseComponent} from './shift/shift-choose/shift-choose.component';
+import {AdminPageComponent} from './admin/admin-page/admin-page.component';
+import {RouteListComponent} from './route/route-list/route-list.component';
+import {RouteCreateComponent} from './route/route-create/route-create.component';
+import {RouteUpdateComponent} from './route/route-update/route-update.component';
+import {TimeStartOverviewComponent} from './time-start/time-start-overview/time-start-overview.component';
+import {TimeStartCreateComponent} from './time-start/time-start-create/time-start-create.component';
+import {TimeStartUpdateComponent} from './time-start/time-start-update/time-start-update.component';
+import {TimeEndOverviewComponent} from "./time-end/time-end-overview/time-end-overview.component";
+import {TimeEndCreateComponent} from "./time-end/time-end-create/time-end-create.component";
+import {TimeEndUpdateComponent} from "./time-end/time-end-update/time-end-update.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -17,6 +27,16 @@ const routes: Routes = [
   {path: 'shift-update/:id', component: ShiftUpdateComponent, canActivate: [AuthGuard]},
   {path: 'shift-overview', component: ShiftOverviewComponent, canActivate: [AuthGuard]},
   {path: 'pending-calendar-shift', component: PshiftViewComponent},
+  {path: 'admin-page', component: AdminPageComponent},
+  {path: 'route-overview', component: RouteListComponent},
+  {path: 'route-create', component: RouteCreateComponent},
+  {path: 'route-update/:id', component: RouteUpdateComponent},
+  {path: 'time-start-overview', component: TimeStartOverviewComponent},
+  {path: 'time-start-create', component: TimeStartCreateComponent},
+  {path: 'time-start-update/:id', component: TimeStartUpdateComponent},
+  {path: 'time-end-overview', component: TimeEndOverviewComponent},
+  {path: 'time-end-create', component: TimeEndCreateComponent},
+  {path: 'time-end-update/:id', component: TimeEndUpdateComponent},
   {path: 'login', component: LoginComponent},
   {path: 'test', component: TestComponent, canActivate: [AuthGuard]},
   {path: 'user', component: UserPageComponent, canActivate: [AuthGuard]},
