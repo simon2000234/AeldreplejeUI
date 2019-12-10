@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {AuthenticationService} from "./authentication.service";
 import {Observable} from "rxjs";
 import {Shift} from "../models/shift-model";
-
+import {TimeEnd} from "../models/time-end-model";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,43 +12,39 @@ const httpOptions = {
     Authorization: 'my-auth-token'
   })
 };
-
 @Injectable({
   providedIn: 'root'
 })
-export class ShiftService {
+export class TimeEndService {
 
-  apiUrl = environment.baseUrl + 'shift';
+  apiUrl = environment.baseUrl + 'timeends';
   constructor(private http: HttpClient,
               private authService: AuthenticationService) { }
-  getShifts(): Observable<Shift[]> {
+  getTimeEnds(): Observable<TimeEnd[]> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    return this.http.get<Shift[]>(this.apiUrl, httpOptions);
+    return this.http.get<TimeEnd[]>(this.apiUrl, httpOptions);
   }
-  getShift(id: number): Observable<Shift> {
+  getTimeEnd(id: number): Observable<TimeEnd> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
     const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Shift>(url, httpOptions);
+    return this.http.get<TimeEnd>(url, httpOptions);
   }
-  addShift(shift: Shift): Observable<Shift> {
+  addTimeEnd(timeEnd: TimeEnd): Observable<TimeEnd> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    return this.http.post<Shift>(this.apiUrl, shift, httpOptions);
+    return this.http.post<TimeEnd>(this.apiUrl, timeEnd, httpOptions);
   }
-  updateShift(shift: Shift): Observable<Shift> {
-    if (shift.user) {
-      shift.user = {id: shift.user.id};
-    }
+  updateTimeEnd(timeEnd: TimeEnd): Observable<TimeEnd> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
 
-    const url = `${this.apiUrl}/${shift.id}`;
-    return this.http.put<Shift>(url, shift, httpOptions);
+    const url = `${this.apiUrl}/${timeEnd.id}`;
+    return this.http.put<TimeEnd>(url, timeEnd, httpOptions);
   }
   deleteShift(id: number): Observable<any> {
     httpOptions.headers =
