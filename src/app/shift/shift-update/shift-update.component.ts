@@ -9,6 +9,12 @@ import {Shift} from '../../shared/models/shift-model';
 import {PendingShift} from '../../shared/models/pendingshift-model';
 import {CalendarService} from "../../shared/services/calendar.service";
 import * as moment from "moment";
+import {ActiveRoute} from "../../shared/models/active-route-model";
+import {ActiveRouteService} from "../../shared/services/active-route.service";
+import {TimeStart} from "../../shared/models/time-start-model";
+import {TimeStartService} from "../../shared/services/time-start.service";
+import {TimeEnd} from "../../shared/models/time-end-model";
+import {TimeEndService} from "../../shared/services/time-end.service";
 
 @Component({
   selector: 'app-shift-update',
@@ -17,9 +23,9 @@ import * as moment from "moment";
 })
 export class ShiftUpdateComponent implements OnInit {
 
-  startTimes: any = ['15:00', '15:30', '16:00', '16:30'];
-  endTimes: any = ['23:00'];
-  tempRoutes: any = ['MA01', 'MA02', 'MA03', 'MA28', 'MA29', 'MA30'];
+  startTimes: TimeStart[];
+  endTimes: TimeEnd[];
+  ActiveRoutes: ActiveRoute[];
   shiftForm = this.fb.group({
     date: [''],
     timeStart: [''],
@@ -37,23 +43,40 @@ export class ShiftUpdateComponent implements OnInit {
               private routeService: RouteService,
               private pShiftService: PendingShiftService,
               public cService: CalendarService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private arService: ActiveRouteService,
+              private tsService: TimeStartService,
+              private teService: TimeEndService) { }
 
   ngOnInit() {
     this.currentDate = this.cService.getCalendarDate();
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.pShiftService.getPendingShift(this.id)
-      .subscribe(pshiftFromRest => {
-        this.currentPShift = pshiftFromRest;
-        this.currentRoute = pshiftFromRest.shift.route;
-        this.currentShift = pshiftFromRest.shift;
-        this.shiftForm.controls.date.setValue(this.currentDate.toISOString().substring(0, 10));
-        this.patchTime();
-        this.shiftForm.controls.route.setValue(this.currentRoute.name);
-        /*this.shiftForm.patchValue({
-          route: pshiftFromRest.shift.route.name
-            });*/
+    this.arService.getActiveRoutes()
+      .subscribe(ar => {
+        this.ActiveRoutes = ar;
+        this.tsService.getTimeStarts()
+          .subscribe(ts => {
+            this.startTimes = ts;
+            this.teService.getTimeEnds()
+              .subscribe(te => {
+                this.endTimes = te;
+                this.pShiftService.getPendingShift(this.id)
+                  .subscribe(pshiftFromRest => {
+                    this.currentPShift = pshiftFromRest;
+                    this.currentRoute = pshiftFromRest.shift.route;
+                    this.currentShift = pshiftFromRest.shift;
+                    this.shiftForm.controls.date.setValue(this.currentDate.toISOString().substring(0, 10));
+                    this.patchTime();
+                    this.shiftForm.controls.route.setValue(this.currentRoute.name);
+                  });
+              });
+          });
       });
+
+  }
+  getActiveRoutes(): void {
+    this.arService.getActiveRoutes()
+      .subscribe(ar => this.ActiveRoutes = ar);
   }
   changeStart(e) {
     console.log(e.target.value);
@@ -100,9 +123,11 @@ export class ShiftUpdateComponent implements OnInit {
             .seconds(0)
             .toDate()),
           route: {id: shiftRoute.id},
-          user: {id: this.currentShift.user.id}
-
+          // user: {id: this.currentShift.user.id}
         };
+        if (this.currentShift.user) {
+          shiftToUpdate.user = {id: this.currentShift.user.id};
+        }
         this.shiftService.updateShift(shiftToUpdate)
           .subscribe(stu => {
             shiftToUpdate = stu;

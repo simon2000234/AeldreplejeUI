@@ -9,7 +9,13 @@ import {PendingShiftService} from '../../shared/services/pending-shift.service';
 import {Shift} from '../../shared/models/shift-model';
 import {PendingShift} from '../../shared/models/pendingshift-model';
 import * as moment from 'moment';
-import {CalendarService} from "../../shared/services/calendar.service";
+import {CalendarService} from '../../shared/services/calendar.service';
+import {ActiveRouteService} from '../../shared/services/active-route.service';
+import {ActiveRoute} from '../../shared/models/active-route-model';
+import {TimeStart} from "../../shared/models/time-start-model";
+import {TimeStartService} from "../../shared/services/time-start.service";
+import {TimeEndService} from "../../shared/services/time-end.service";
+import {TimeEnd} from "../../shared/models/time-end-model";
 
 @Component({
   selector: 'app-shift-create',
@@ -18,9 +24,9 @@ import {CalendarService} from "../../shared/services/calendar.service";
 })
 export class ShiftCreateComponent implements OnInit {
 
-  startTimes: any = ['15:00', '15:30', '16:00', '16:30'];
-  endTimes: any = ['23:00'];
-  tempRoutes: any = ['MA01', 'MA02', 'MA03', 'MA28', 'MA29', 'MA30'];
+  startTimes: TimeStart[];
+  endTimes: TimeEnd[];
+  ActiveRoutes: ActiveRoute[];
   currentDate: Date;
   shiftForm = this.fb.group({
     date: [''],
@@ -33,12 +39,29 @@ export class ShiftCreateComponent implements OnInit {
               private shiftService: ShiftService,
               private routeService: RouteService,
               private pShiftService: PendingShiftService,
-              public cService: CalendarService
+              public cService: CalendarService,
+              private arService: ActiveRouteService,
+              private tsService: TimeStartService,
+              private teService: TimeEndService
               ) { }
 
   ngOnInit() {
     this.currentDate = this.cService.getCalendarDate();
     this.shiftForm.controls.date.setValue(this.currentDate.toISOString().substring(0, 10));
+    this.teService.getTimeEnds()
+      .subscribe(te => {
+        this.endTimes = te;
+        this.tsService.getTimeStarts()
+          .subscribe(ts => {
+            this.startTimes = ts;
+            this.getActiveRoutes();
+          });
+      });
+  }
+
+  getActiveRoutes(): void {
+    this.arService.getActiveRoutes()
+      .subscribe(ar => this.ActiveRoutes = ar);
   }
 
   changeStart(e) {

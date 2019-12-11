@@ -1,0 +1,17 @@
+.adminButtons {
+  min-width: 100%;
+  min-height: 20rem;
+  background: #007ab8;
+  border: #333333 solid 3px;
+  font-size: 24px;
+  color: white;
+  margin-top: 5%;
+}
+
+.adminButtons:hover {
+  background: #005b96;
+}
+
+.topMargin {
+  margin-top: 5%;
+}
