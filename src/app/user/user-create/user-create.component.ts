@@ -18,7 +18,8 @@ export class UserCreateComponent implements OnInit {
     isAdmin: [''],
     email: [''],
     userGroup: [''],
-    profilePicture: ['']
+    profilePicture: [''],
+    password: ['']
   });
   Groups: Group[];
   constructor(private fb: FormBuilder,
@@ -49,7 +50,8 @@ export class UserCreateComponent implements OnInit {
       group: {id: chosenGroup.id},
       email: this.userForm.value.email,
       profilePicture: this.userForm.value.profilePicture,
-      isAdmin: this.userForm.value.isAdmin
+      isAdmin: this.userForm.value.isAdmin,
+      password: this.userForm.value.password
     };
     this.userService.addUser(userToCreate)
       .subscribe(() => {

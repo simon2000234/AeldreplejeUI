@@ -4,6 +4,7 @@ import {UserPendingShift} from './user-pending-shift-model';
 
 export interface User {
   id?: number;
+  password?: string;
   name?: string;
   isAdmin?: boolean;
   email?: string;

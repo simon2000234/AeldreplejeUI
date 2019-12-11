@@ -7,6 +7,11 @@
     </div>
 
     <div class="form-group">
+      <label>Password:</label>
+      <input type="password" class="form-control" formControlName="password">
+    </div>
+
+    <div class="form-group">
       <label>Gruppe: </label>
       <select class="custom-select" (change)="changeGroup($event)" formControlName="userGroup">
         <option value="" disabled>Vælg gruppe</option>

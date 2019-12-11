@@ -19,7 +19,8 @@ export class UserUpdateComponent implements OnInit {
     isAdmin: [''],
     email: [''],
     userGroup: [''],
-    profilePicture: ['']
+    profilePicture: [''],
+    password: ['']
   });
   id;
   Groups: Group[];
@@ -61,15 +62,16 @@ export class UserUpdateComponent implements OnInit {
       groupName = this.userForm.value.userGroup;
       chosenGroup = this.Groups.find(g => g.type === groupName);
     }
-    console.log(chosenGroup);
     const userToUpdate: User = {
       id: this.id,
       name: this.userForm.value.name,
       group: {id: chosenGroup.id},
       email: this.userForm.value.email,
       profilePicture: this.userForm.value.profilePicture,
-      isAdmin: this.userForm.value.isAdmin
+      isAdmin: this.userForm.value.isAdmin,
+      password: this.userForm.value.password
     };
+    console.log(chosenGroup);
     this.userService.updateUser(userToUpdate)
       .subscribe(() => {
         this.router.navigateByUrl('/user-overview');
