@@ -103,13 +103,13 @@ export class ShiftCreateComponent implements OnInit {
     const routeNameFix = shiftFromFields.route.indexOf('M');
     let shiftRoute: ShiftRoute = {name: shiftFromFields.route.substr(routeNameFix)};
 
-    let groupName = this.shiftForm.value.userGroup.substr(3);
+    /*let groupName = this.shiftForm.value.userGroup.substr(3);
     console.log(groupName);
     let chosenGroup = this.Groups.find(g => g.type === groupName);
     if (chosenGroup == null) {
       groupName = this.shiftForm.value.userGroup;
       chosenGroup = this.Groups.find(g => g.type === groupName);
-    }
+    }*/
 
     this.routeService.addShiftRoute(shiftRoute)
       .subscribe(sr => {

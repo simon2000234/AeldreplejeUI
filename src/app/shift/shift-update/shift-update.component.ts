@@ -115,13 +115,13 @@ export class ShiftUpdateComponent implements OnInit {
   save() {
     const shiftFromFields = this.shiftForm.value;
     const routeNameFix = shiftFromFields.route.indexOf('M');
-    let groupName = this.shiftForm.value.userGroup.substr(3);
+    /*let groupName = this.shiftForm.value.userGroup.substr(3);
     console.log(groupName);
     let chosenGroup = this.Groups.find(g => g.type === groupName);
     if (chosenGroup == null) {
       groupName = this.shiftForm.value.userGroup;
       chosenGroup = this.Groups.find(g => g.type === groupName);
-    }
+    }*/
     let shiftRoute: ShiftRoute = {
       id: this.currentRoute.id,
       name: shiftFromFields.route.substr(routeNameFix)};
