@@ -1,5 +1,5 @@
 
 export interface Group {
   id: number;
-  type: string;
+  type?: string;
 }

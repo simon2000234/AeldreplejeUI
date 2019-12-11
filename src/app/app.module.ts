@@ -26,6 +26,9 @@ import { TimeStartUpdateComponent } from './time-start/time-start-update/time-st
 import { TimeEndOverviewComponent } from './time-end/time-end-overview/time-end-overview.component';
 import { TimeEndCreateComponent } from './time-end/time-end-create/time-end-create.component';
 import { TimeEndUpdateComponent } from './time-end/time-end-update/time-end-update.component';
+import { UserOverviewComponent } from './user/user-overview/user-overview.component';
+import { UserCreateComponent } from './user/user-create/user-create.component';
+import { UserUpdateComponent } from './user/user-update/user-update.component';
 
 
 
@@ -52,6 +55,9 @@ import { TimeEndUpdateComponent } from './time-end/time-end-update/time-end-upda
     TimeEndOverviewComponent,
     TimeEndCreateComponent,
     TimeEndUpdateComponent,
+    UserOverviewComponent,
+    UserCreateComponent,
+    UserUpdateComponent,
   ],
   imports: [
     BrowserModule,

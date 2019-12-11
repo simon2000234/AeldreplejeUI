@@ -20,6 +20,9 @@ import {TimeStartUpdateComponent} from './time-start/time-start-update/time-star
 import {TimeEndOverviewComponent} from "./time-end/time-end-overview/time-end-overview.component";
 import {TimeEndCreateComponent} from "./time-end/time-end-create/time-end-create.component";
 import {TimeEndUpdateComponent} from "./time-end/time-end-update/time-end-update.component";
+import {UserOverviewComponent} from "./user/user-overview/user-overview.component";
+import {UserCreateComponent} from "./user/user-create/user-create.component";
+import {UserUpdateComponent} from "./user/user-update/user-update.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -37,6 +40,9 @@ const routes: Routes = [
   {path: 'time-end-overview', component: TimeEndOverviewComponent},
   {path: 'time-end-create', component: TimeEndCreateComponent},
   {path: 'time-end-update/:id', component: TimeEndUpdateComponent},
+  {path: 'user-overview', component: UserOverviewComponent},
+  {path: 'user-create', component: UserCreateComponent},
+  {path: 'user-update/:id', component: UserUpdateComponent},
   {path: 'login', component: LoginComponent},
   {path: 'test', component: TestComponent, canActivate: [AuthGuard]},
   {path: 'user', component: UserPageComponent, canActivate: [AuthGuard]},

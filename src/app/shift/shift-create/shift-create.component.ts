@@ -12,10 +12,12 @@ import * as moment from 'moment';
 import {CalendarService} from '../../shared/services/calendar.service';
 import {ActiveRouteService} from '../../shared/services/active-route.service';
 import {ActiveRoute} from '../../shared/models/active-route-model';
-import {TimeStart} from "../../shared/models/time-start-model";
-import {TimeStartService} from "../../shared/services/time-start.service";
-import {TimeEndService} from "../../shared/services/time-end.service";
-import {TimeEnd} from "../../shared/models/time-end-model";
+import {TimeStart} from '../../shared/models/time-start-model';
+import {TimeStartService} from '../../shared/services/time-start.service';
+import {TimeEndService} from '../../shared/services/time-end.service';
+import {TimeEnd} from '../../shared/models/time-end-model';
+import {Group} from '../../shared/models/group-model';
+import {GroupService} from '../../shared/services/group.service';
 
 @Component({
   selector: 'app-shift-create',
@@ -28,11 +30,13 @@ export class ShiftCreateComponent implements OnInit {
   endTimes: TimeEnd[];
   ActiveRoutes: ActiveRoute[];
   currentDate: Date;
+  Groups: Group[];
   shiftForm = this.fb.group({
     date: [''],
     timeStart: [''],
     timeEnd: [''],
-    route: ['']
+    route: [''],
+    userGroup: ['']
   });
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -42,7 +46,8 @@ export class ShiftCreateComponent implements OnInit {
               public cService: CalendarService,
               private arService: ActiveRouteService,
               private tsService: TimeStartService,
-              private teService: TimeEndService
+              private teService: TimeEndService,
+              private groupService: GroupService
               ) { }
 
   ngOnInit() {
@@ -55,6 +60,10 @@ export class ShiftCreateComponent implements OnInit {
           .subscribe(ts => {
             this.startTimes = ts;
             this.getActiveRoutes();
+            this.groupService.getGroups()
+              .subscribe(groups => {
+                this.Groups = groups;
+              });
           });
       });
   }
@@ -82,11 +91,25 @@ export class ShiftCreateComponent implements OnInit {
       onlySelf: true
     });
   }
+  changeGroup(e) {
+    console.log(e.target.value);
+    this.shiftForm.get('userGroup').setValue(e.target.value, {
+      onlySelf: true
+    });
+  }
 
   save() {
     const shiftFromFields = this.shiftForm.value;
     const routeNameFix = shiftFromFields.route.indexOf('M');
     let shiftRoute: ShiftRoute = {name: shiftFromFields.route.substr(routeNameFix)};
+
+    let groupName = this.shiftForm.value.userGroup.substr(3);
+    console.log(groupName);
+    let chosenGroup = this.Groups.find(g => g.type === groupName);
+    if (chosenGroup == null) {
+      groupName = this.shiftForm.value.userGroup;
+      chosenGroup = this.Groups.find(g => g.type === groupName);
+    }
 
     this.routeService.addShiftRoute(shiftRoute)
       .subscribe(sr => {

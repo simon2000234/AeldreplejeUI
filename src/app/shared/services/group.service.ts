@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class GroupService {
 
-  apiUrl = environment.baseUrl + 'groups';
+  apiUrl = environment.baseUrl + 'group';
   constructor(private http: HttpClient,
               private authService: AuthenticationService) { }
   getGroups(): Observable<Group[]> {

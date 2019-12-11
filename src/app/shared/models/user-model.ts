@@ -1,11 +1,11 @@
 import {Group} from './group-model';
 import {Shift} from './shift-model';
-import {UserPendingShift} from "./user-pending-shift-model";
+import {UserPendingShift} from './user-pending-shift-model';
 
 export interface User {
-  id: number;
+  id?: number;
   name?: string;
-  Role?: string;
+  isAdmin?: boolean;
   email?: string;
   group?: Group;
   profilePicture?: string;

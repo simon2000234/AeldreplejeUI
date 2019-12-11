@@ -1,0 +1,37 @@
+<div class="container">
+  <form [formGroup]="userForm" (ngSubmit)="save()">
+
+    <div class="form-group">
+      <label>Navn:</label>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+
+    <div class="form-group">
+      <label>Gruppe: </label>
+      <select class="custom-select" (change)="changeGroup($event)" formControlName="userGroup">
+        <option value="" disabled>Vælg gruppe</option>
+        <option *ngFor="let group of Groups" [ngValue]="group.type">{{group.type}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" class="form-control" formControlName="email" placeholder="eksempel@mail.com">
+    </div>
+
+    <div class="form-group">
+      <label>Profilbillede link:</label>
+      <input type="text" class="form-control" formControlName="profilePicture">
+    </div>
+
+    <div class="form-group">
+      <label>Administrator:</label>
+      <input type="checkbox" class="form-control" formControlName="isAdmin">
+    </div>
+
+    <div class="form-group">
+      <button class="button" type="submit">Save</button>
+    </div>
+
+  </form>
+</div>

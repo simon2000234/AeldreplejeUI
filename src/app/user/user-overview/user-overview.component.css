@@ -1,0 +1,15 @@
+.image-fit {
+  width:100%;
+  height:250px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.routeCards {
+  border: #007ab8 solid 2px;
+}
+
+.createRouteButton {
+  font-size: 24px;
+}
+

@@ -30,6 +30,14 @@
       </select>
     </div>
 
+    <div class="form-group">
+      <label>Gruppe: </label>
+      <select class="custom-select" (change)="changeGroup($event)" formControlName="userGroup">
+        <option value="" disabled>Vælg gruppe</option>
+        <option *ngFor="let group of Groups" [ngValue]="group.type">{{group.type}}</option>
+      </select>
+    </div>
+
     <div class="for m-group">
       <button class="button" type="submit">Save</button>
     </div>
