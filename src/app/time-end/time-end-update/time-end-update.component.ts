@@ -15,6 +15,7 @@ export class TimeEndUpdateComponent implements OnInit {
   timeEndForm = this.fb.group({
     timeEnd: ['']
   });
+  errorMessage = '';
   constructor(private fb: FormBuilder,
               private teService: TimeEndService,
               private router: Router,
@@ -36,7 +37,10 @@ export class TimeEndUpdateComponent implements OnInit {
     this.teService.updateTimeEnd(timeEnd)
       .subscribe(() => {
         this.router.navigateByUrl('/time-end-overview');
-      });
+      },
+        error => {
+          this.errorMessage = error.message;
+        });
   }
 
 }

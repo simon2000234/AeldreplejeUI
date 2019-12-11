@@ -4,6 +4,9 @@
       <label class="labelText">Sluttidspunkt:</label>
       <input type="text" class="form-control" formControlName="timeEnd" placeholder="Eksempel: 23:30">
     </div>
+    <div *ngIf="errorMessage" class="alert-danger">
+      {{errorMessage}}
+    </div>
     <button type="submit" class="btn btn-primary">Gem</button>
   </form>
 </div>

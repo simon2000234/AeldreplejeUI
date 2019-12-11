@@ -16,6 +16,7 @@ export class TimeStartCreateComponent implements OnInit {
   timeStartForm = this.fb.group({
     timeStart: ['']
   });
+  errorMessage = '';
   constructor(private fb: FormBuilder,
               private tsService: TimeStartService,
               private router: Router) { }
@@ -27,7 +28,10 @@ export class TimeStartCreateComponent implements OnInit {
     this.tsService.addTimeStart(timeStart)
       .subscribe(() => {
         this.router.navigateByUrl('/time-start-overview');
-      });
+      },
+        error => {
+          this.errorMessage = error.message;
+        });
   }
 
 }
