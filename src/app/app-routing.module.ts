@@ -17,12 +17,15 @@ import {RouteUpdateComponent} from './route/route-update/route-update.component'
 import {TimeStartOverviewComponent} from './time-start/time-start-overview/time-start-overview.component';
 import {TimeStartCreateComponent} from './time-start/time-start-create/time-start-create.component';
 import {TimeStartUpdateComponent} from './time-start/time-start-update/time-start-update.component';
-import {TimeEndOverviewComponent} from "./time-end/time-end-overview/time-end-overview.component";
-import {TimeEndCreateComponent} from "./time-end/time-end-create/time-end-create.component";
-import {TimeEndUpdateComponent} from "./time-end/time-end-update/time-end-update.component";
-import {UserOverviewComponent} from "./user/user-overview/user-overview.component";
-import {UserCreateComponent} from "./user/user-create/user-create.component";
-import {UserUpdateComponent} from "./user/user-update/user-update.component";
+import {TimeEndOverviewComponent} from './time-end/time-end-overview/time-end-overview.component';
+import {TimeEndCreateComponent} from './time-end/time-end-create/time-end-create.component';
+import {TimeEndUpdateComponent} from './time-end/time-end-update/time-end-update.component';
+import {UserOverviewComponent} from './user/user-overview/user-overview.component';
+import {UserCreateComponent} from './user/user-create/user-create.component';
+import {UserUpdateComponent} from './user/user-update/user-update.component';
+import {GroupCreateComponent} from './group/group-create/group-create.component';
+import {GroupOverviewComponent} from './group/group-overview/group-overview.component';
+import {GroupUpdateComponent} from './group/group-update/group-update.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -43,6 +46,9 @@ const routes: Routes = [
   {path: 'user-overview', component: UserOverviewComponent},
   {path: 'user-create', component: UserCreateComponent},
   {path: 'user-update/:id', component: UserUpdateComponent},
+  {path: 'group-overview', component: GroupOverviewComponent},
+  {path: 'group-create', component: GroupCreateComponent},
+  {path: 'group-update/:id', component: GroupUpdateComponent},
   {path: 'login', component: LoginComponent},
   {path: 'test', component: TestComponent, canActivate: [AuthGuard]},
   {path: 'user', component: UserPageComponent, canActivate: [AuthGuard]},

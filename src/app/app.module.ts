@@ -29,6 +29,9 @@ import { TimeEndUpdateComponent } from './time-end/time-end-update/time-end-upda
 import { UserOverviewComponent } from './user/user-overview/user-overview.component';
 import { UserCreateComponent } from './user/user-create/user-create.component';
 import { UserUpdateComponent } from './user/user-update/user-update.component';
+import { GroupOverviewComponent } from './group/group-overview/group-overview.component';
+import { GroupCreateComponent } from './group/group-create/group-create.component';
+import { GroupUpdateComponent } from './group/group-update/group-update.component';
 
 
 
@@ -58,6 +61,9 @@ import { UserUpdateComponent } from './user/user-update/user-update.component';
     UserOverviewComponent,
     UserCreateComponent,
     UserUpdateComponent,
+    GroupOverviewComponent,
+    GroupCreateComponent,
+    GroupUpdateComponent,
   ],
   imports: [
     BrowserModule,
