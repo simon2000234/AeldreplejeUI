@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AuthenticationService} from "./authentication.service";
-import {environment} from "../../../environments/environment";
-import {Observable} from "rxjs";
-import {Shift} from "../models/shift-model";
-import {Group} from "../models/group-model";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AuthenticationService} from './authentication.service';
+import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs';
+import {Shift} from '../models/shift-model';
+import {Group} from '../models/group-model';
 
 const httpOptions = {
   headers: new HttpHeaders({
