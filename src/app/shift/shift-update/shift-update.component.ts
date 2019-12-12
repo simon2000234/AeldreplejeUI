@@ -41,6 +41,7 @@ export class ShiftUpdateComponent implements OnInit {
   currentPShift: PendingShift;
   currentRoute: ShiftRoute;
   currentShift: Shift;
+  currentGroup: Group;
   constructor(private fb: FormBuilder,
               private router: Router,
               private shiftService: ShiftService,
@@ -76,6 +77,8 @@ export class ShiftUpdateComponent implements OnInit {
                     this.groupService.getGroups()
                       .subscribe(groups => {
                         this.Groups = groups;
+                        this.currentGroup = this.Groups.find(x => x.qualificationNumber === this.currentShift.shiftQualificationNumber);
+                        this.shiftForm.controls.userGroup.setValue(this.currentGroup.type);
                       });
                   });
               });
@@ -115,13 +118,13 @@ export class ShiftUpdateComponent implements OnInit {
   save() {
     const shiftFromFields = this.shiftForm.value;
     const routeNameFix = shiftFromFields.route.indexOf('M');
-    /*let groupName = this.shiftForm.value.userGroup.substr(3);
+    let groupName = this.shiftForm.value.userGroup.substr(3);
     console.log(groupName);
     let chosenGroup = this.Groups.find(g => g.type === groupName);
     if (chosenGroup == null) {
       groupName = this.shiftForm.value.userGroup;
       chosenGroup = this.Groups.find(g => g.type === groupName);
-    }*/
+    }
     let shiftRoute: ShiftRoute = {
       id: this.currentRoute.id,
       name: shiftFromFields.route.substr(routeNameFix)};
@@ -145,7 +148,7 @@ export class ShiftUpdateComponent implements OnInit {
             .seconds(0)
             .toDate()),
           route: {id: shiftRoute.id},
-          // user: {id: this.currentShift.user.id}
+          shiftQualificationNumber: chosenGroup.qualificationNumber
         };
         if (this.currentShift.user) {
           shiftToUpdate.user = {id: this.currentShift.user.id};

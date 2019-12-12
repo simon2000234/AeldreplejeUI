@@ -13,7 +13,8 @@ import {Group} from '../../shared/models/group-model';
 })
 export class GroupCreateComponent implements OnInit {
   groupForm = this.fb.group({
-    type: ['']
+    type: [''],
+    qualificationNumber: ['']
   });
   constructor(private fb: FormBuilder,
               private groupService: GroupService,
@@ -22,7 +23,10 @@ export class GroupCreateComponent implements OnInit {
   ngOnInit() {
   }
   save() {
-    const group: Group = {type: this.groupForm.value.type};
+    const group: Group = {
+      type: this.groupForm.value.type,
+      qualificationNumber: this.groupForm.value.qualificationNumber
+    };
     this.groupService.addGroup(group)
       .subscribe(() => {
           this.router.navigateByUrl('/group-overview');

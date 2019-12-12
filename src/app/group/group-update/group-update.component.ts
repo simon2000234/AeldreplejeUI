@@ -13,7 +13,8 @@ import {Group} from "../../shared/models/group-model";
 export class GroupUpdateComponent implements OnInit {
 
   groupForm = this.fb.group({
-    type: ['']
+    type: [''],
+    qualificationNumber: ['']
   });
   id;
   constructor(private fb: FormBuilder,
@@ -26,14 +27,16 @@ export class GroupUpdateComponent implements OnInit {
     this.groupService.getGroup(this.id)
       .subscribe( groupFromRest => {
         this.groupForm.patchValue({
-          type: groupFromRest.type
+          type: groupFromRest.type,
+          qualificationNumber: groupFromRest.qualificationNumber
         });
       });
   }
   save() {
     const group: Group = {
       id: this.id,
-      type: this.groupForm.value.type};
+      type: this.groupForm.value.type,
+      qualificationNumber: this.groupForm.value.qualificationNumber};
     this.groupService.updateGroup(group)
       .subscribe(() => {
           this.router.navigateByUrl('/group-overview');
