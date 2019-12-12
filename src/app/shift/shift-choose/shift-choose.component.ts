@@ -21,10 +21,12 @@ export class ShiftChooseComponent implements OnInit {
               private route: ActivatedRoute,
               private shiftService: ShiftService,
               private navigator: Router,
-              private calSer: CalendarService) {
+              private calSer: CalendarService,
+              private userService: UserService) {
   }
   pShift: PendingShift;
   id: number;
+  Users: User[];
 
   getPendingShift(): void {
     this.pendingShiftService.getPendingShift(this.id)
@@ -54,10 +56,17 @@ updateShift(shift: Shift, user: User): void {
   shift.user = user;
   this.shiftService.updateShift(shift).subscribe(s => this.navigator.navigateByUrl('shift-overview'));
 }
+getUser(id: number): User {
+    return this.Users.find(u => u.id === id);
+}
 
   ngOnInit() {
     this.id = Number (this.route.snapshot.paramMap.get('id'));
-    this.getPendingShift();
+    this.userService.getUsers()
+      .subscribe(users => {
+        this.Users = users;
+        this.getPendingShift();
+      });
   }
 
 }

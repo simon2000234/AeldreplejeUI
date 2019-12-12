@@ -10,7 +10,10 @@
     </div>
       <div class="card-body" *ngIf="!checkIfShiftIsOnSameDay(user.user)">
         <h5 class="card-title">{{user.user.name}}</h5>
-        <p class="card-text">{{user.user.email}}</p>
+        <p class="card-text">
+          {{user.user.email}}<br>
+          {{getUser(user.user.id).group.type}}
+        </p>
         <button class="btn users-button" (click)="saveShift(user.user)">Vælg</button>
       </div>
 </div>

@@ -9,9 +9,13 @@
             Start: {{pShift.shift.timeStart.toString().slice(11,19)}}
             <br>
             End: {{pShift.shift.timeEnd.toString().slice(11,19)}}
+            <br>
+            Type vagt: {{showGroup(pShift.shift).type}}
           </p>
           <div *ngIf="pShift.shift.user === null && pShift.users.length > 0">
-            <p>Antal bud på vagten: {{pShift.users.length}}</p>
+            <p>
+              Antal bud på vagten: {{pShift.users.length}}
+            </p>
           </div>
           <div *ngIf="pShift.shift.user != null">
             <p>{{pShift.shift.user.name}} har vagten</p>

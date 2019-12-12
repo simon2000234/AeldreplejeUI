@@ -6,6 +6,9 @@ import {PendingShiftService} from "../../../shared/services/pending-shift.servic
 import {ShiftService} from "../../../shared/services/shift.service";
 import {RouteService} from "../../../shared/services/route.service";
 import {Router} from "@angular/router";
+import {Group} from "../../../shared/models/group-model";
+import {GroupService} from "../../../shared/services/group.service";
+import {Shift} from "../../../shared/models/shift-model";
 
 @Component({
   selector: 'app-pshift-view',
@@ -15,16 +18,23 @@ import {Router} from "@angular/router";
 export class PshiftViewComponent implements OnInit {
 
   PShifts: PendingShift[];
+  Groups: Group[];
   chosenDate: Date;
   constructor(public cService: CalendarService,
               private pshiftService: PendingShiftService,
               private shiftService: ShiftService,
               private routeService: RouteService,
-              private router: Router) { }
+              private router: Router,
+              private groupService: GroupService) { }
 
   ngOnInit() {
     this.PShifts = this.cService.getCalendarArray();
     this.chosenDate = this.cService.getCalendarDate();
+    this.groupService.getGroups()
+      .subscribe(groups => this.Groups = groups);
+  }
+  showGroup(shift: Shift): Group {
+    return this.Groups.find(x => x.qualificationNumber === shift.shiftQualificationNumber);
   }
 
   Delete(pendingShift: PendingShift) {
