@@ -9,4 +9,5 @@ export interface Shift {
   route?: ShiftRoute;
   activeRoute?: boolean;
   user?: User;
+  shiftQualificationNumber?: number;
 }
