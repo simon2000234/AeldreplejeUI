@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://localhost:44340/api/'
+  baseUrl: 'https://aeldrepleje.azurewebsites.net/api/'
 
 };
 
